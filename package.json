@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "lint": "eslint ."
+    "lint": "eslint . --ext .ts --config tsconfig.eslint.json"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "eslint": "^8.54.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "typescript": "^5.3.2"
   }
 }
