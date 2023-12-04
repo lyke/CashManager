@@ -16,7 +16,7 @@ Welcome to the Cash Manager repository.
 
 >The commands are available in package.json.
 
-##### Starting server
+##### Starting MySQL server
 
     $ sudo mysql -u root -p
     ou
