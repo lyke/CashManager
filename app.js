@@ -11,6 +11,7 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
   if (err) {
     console.error('Erreur de connexion à la base de données : ', err);
+    connection.end();
   } else {
     console.log('Connecté à la base de données!');
 
@@ -21,27 +22,57 @@ connection.connect((err) => {
         console.error('Erreur lors de la création de la base de données : ', databaseError);
       } else {
         console.log('Base de données "cash_manager_db" créée avec succès :', databaseResults);
+
+        const createTableProductsQuery = `
+          CREATE TABLE IF NOT EXISTS product (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255),
+            price DECIMAL(10, 2),
+            image VARCHAR(255),
+            description TEXT
+          )
+        `;
+
+        const createTableAdminsQuery = `
+          CREATE TABLE IF NOT EXISTS admin (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(255),
+            password VARCHAR(255)
+          )
+        `;
+
+        const createTableOrdersQuery = `
+          CREATE TABLE IF NOT EXISTS \`order\` (
+            id INT AUTO_INCREMENT PRIMARY KEY
+          )
+        `;
+
+        connection.query(createTableProductsQuery, (tableError, tableResults) => {
+          if (tableError) {
+            console.error('Erreur lors de la création de la table product: ', tableError);
+          } else {
+            console.log('Table "product" créée avec succès :', tableResults);
+          }
+
+          connection.query(createTableAdminsQuery, (adminTableError, adminTableResults) => {
+            if (adminTableError) {
+              console.error('Erreur lors de la création de la table admin: ', adminTableError);
+            } else {
+              console.log('Table "admin" créée avec succès :', adminTableResults);
+            }
+
+            connection.query(createTableOrdersQuery, (orderTableError, orderTableResults) => {
+              if (orderTableError) {
+                console.error('Erreur lors de la création de la table order: ', orderTableError);
+              } else {
+                console.log('Table "order" créée avec succès :', orderTableResults);
+              }
+
+              connection.end();
+            });
+          });
+        });
       }
-
-      const createTableQuery = `
-        CREATE TABLE IF NOT EXISTS product (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          name VARCHAR(255),
-          price DECIMAL(10, 2),
-          image VARCHAR(255),
-          description TEXT
-        )
-      `;
-
-      connection.query(createTableQuery, (tableError, tableResults) => {
-        if (tableError) {
-          console.error('Erreur lors de la création de la table : ', tableError);
-        } else {
-          console.log('Table "product" créée avec succès :', tableResults);
-        }
-
-        connection.end();
-      });
     });
   }
 });
