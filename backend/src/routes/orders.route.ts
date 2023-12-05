@@ -2,7 +2,7 @@ import express, { Router } from 'express';
 import { OrdersController } from '../controllers/orders.controller';
 
 export class OrdersRoute {
-  private router: Router = express.Router();
+  private api: Router = express.Router();
   private readonly ordersController: OrdersController;
 
   constructor(db: any) {
@@ -11,28 +11,28 @@ export class OrdersRoute {
   }
 
   public getRouter(): Router {
-    return this.router;
+    return this.api;
   }
 
   private routes(): void {
-    this.router.get(
+    this.api.get(
       '/',
       this.ordersController.getAllOrders.bind(this.ordersController)
     );
 
-    this.router.get(
+    this.api.get(
       '/:id',
       this.ordersController.getOrderById.bind(this.ordersController));
 
-    this.router.post(
+    this.api.post(
       '/',
       this.ordersController.createOrder.bind(this.ordersController));
 
-    this.router.put(
+    this.api.put(
       '/:id',
       this.ordersController.updateOrder.bind(this.ordersController));
 
-    this.router.delete(
+    this.api.delete(
       '/:id',
       this.ordersController.deleteOrder.bind(this.ordersController));
   }
