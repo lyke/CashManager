@@ -1,30 +1,74 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { AdminsService } from '../services/admins.service';
 
 export class AdminsController {
-  private adminService: AdminsService;
+  private adminsService: AdminsService;
 
   constructor(db: any) {
-    this.adminService = new AdminsService(db);
+    this.adminsService = new AdminsService(db);
   }
 
-  public getAllAdmins(req: Request, res: Response): void {
-    // Logique pour obtenir tous les administrateurs depuis la base de données
+  public async getAllAdmins(req: Request, res: Response, next: NextFunction) {
+    try {
+      const admins = await this.adminsService.getAllAdmins();
+
+      res.status(200).json(admins);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des ordres : ', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération des ordres' });
+      next(error);
+    }
   }
 
-  public getAdminById(req: Request, res: Response): void {
-    // Logique pour obtenir un administrateur par ID depuis la base de données
+  public async getAdminById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const admin = await this.adminsService.getAdminById(Number(req.params.id));
+
+      res.status(200).json(admin);
+    }
+    catch (error) {
+      console.error('Erreur lors de la récupération du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération du produit' });
+      next(error);
+    }
   }
 
-  public createAdmin(req: Request, res: Response): void {
-    // Logique pour créer un nouvel administrateur dans la base de données
+  public async createAdmin(req: Request, res: Response, next: NextFunction) {
+    try {
+      const admin = await this.adminsService.createAdmin(req.body);
+
+      res.status(200).json(admin);
+    }
+    catch (error) {
+      console.error('Erreur lors de la création du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la création du produit' });
+      next(error);
+    }
   }
 
-  public updateAdmin(req: Request, res: Response): void {
-    // Logique pour mettre à jour un administrateur dans la base de données
+  public async updateAdmin(req: Request, res: Response, next: NextFunction) {
+    try {
+      const admin = await this.adminsService.updateAdmin(Number(req.params.id), req.body);
+
+      res.status(200).json(admin);
+    }
+    catch (error) {
+      console.error('Erreur lors de la mise à jour du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la mise à jour du produit' });
+      next(error);
+    }
   }
 
-  public deleteAdmin(req: Request, res: Response): void {
-    // Logique pour supprimer un administrateur de la base de données
+  public async deleteAdmin(req: Request, res: Response, next: NextFunction) {
+    try {
+      const admin = await this.adminsService.deleteAdmin(Number(req.params.id));
+
+      res.status(200).json(admin)
+    }
+    catch (error) {
+      console.error('Erreur lors de la suppression du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la suppression du produit' });
+      next(error);
+    }
   }
 }

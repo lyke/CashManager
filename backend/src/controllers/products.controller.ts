@@ -9,23 +9,66 @@ export class ProductsController {
   }
 
   public async getAllProducts(req: Request, res: Response, next: NextFunction) {
-    // Logique pour récupérer tous les produits depuis la base de données
-    // Utilisez `this.db.query` pour exécuter des requêtes SQL
+    try {
+      const products = await this.productsService.getAllProducts();
+
+      res.status(200).json(products);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des produits : ', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération des produits' });
+      next(error);
+    }
   }
 
   public async getProductById(req: Request, res: Response, next: NextFunction) {
-    // Logique pour récupérer un produit par son ID depuis la base de données
+    try {
+      const product = await this.productsService.getProductById(Number(req.params.id));
+
+      res.status(200).json(product);
+    }
+    catch (error) {
+      console.error('Erreur lors de la récupération du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération du produit' });
+      next(error);
+    }
   }
 
   public async createProduct(req: Request, res: Response, next: NextFunction) {
-    // Logique pour créer un nouveau produit dans la base de données
+    try {
+      const product = await this.productsService.createProduct(req.body);
+
+      res.status(200).json(product);
+    }
+    catch (error) {
+      console.error('Erreur lors de la création du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la création du produit' });
+      next(error);
+    }
   }
 
   public async updateProduct(req: Request, res: Response, next: NextFunction) {
-    // Logique pour mettre à jour un produit par son ID dans la base de données
+    try {
+      const product = await this.productsService.updateProduct(Number(req.params.id), req.body);
+
+      res.status(200).json(product);
+    }
+    catch (error) {
+      console.error('Erreur lors de la mise à jour du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la mise à jour du produit' });
+      next(error);
+    }
   }
 
   public async deleteProduct(req: Request, res: Response, next: NextFunction) {
-    // Logique pour supprimer un produit par son ID de la base de données
+    try {
+      const product = await this.productsService.deleteProduct(Number(req.params.id));
+
+      res.status(200).json(product);
+    }
+    catch (error) {
+      console.error('Erreur lors de la suppression du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la suppression du produit' });
+      next(error);
+    }
   }
 }
