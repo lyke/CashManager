@@ -2,7 +2,7 @@
 
 ### Architecture en couche
 
-![classDiagramm.png](img%2FclassDiagramm.png)
+![classDiagram.png](uml%2FclassDiagram.png)
 
 Comme le montre ce diagramme de classe, nous avons choisi une architecture en couche.
 Cette architecture est un standard de la programmation, ce qui permet d'être facilement compréhensible par les devs.
@@ -24,6 +24,6 @@ Pour illustrer la différence voilà un exemple des deux architectures appliqué
 
 #### Les deux versions du DAO pattern appliqué au projet cash manager
 
-![DAO-pattern-diagram.png](img%2FDAO-pattern-diagram.png)
+![DAO-pattern-diagram.png](uml%2FDAO-pattern-diagram.png)
 
 Comme on le voit le data-mapper préserve moins bien l'indépendance de la couche base de donnée.

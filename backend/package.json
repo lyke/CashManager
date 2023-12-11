@@ -2,12 +2,12 @@
   "name": "cash_manager",
   "version": "1.0.0",
   "description": "",
-  "main": "backend/app.ts",
+  "main": "app.ts",
   "scripts": {
-    "start": "nodemon --exec ts-node backend/app.ts",
-    "lint": "eslint . --ext .ts --config tsconfig.eslint.json",
+    "start": "nodemon --exec ts-node app.ts",
+    "lint": "eslint .. --ext .ts --config tsconfig.eslint.json",
     "prettier:check": "prettier --check \"src/**/*.ts\"",
-    "prettier:run": "prettier --write ."
+    "prettier:run": "prettier --write .."
   },
   "repository": {
     "type": "git",
