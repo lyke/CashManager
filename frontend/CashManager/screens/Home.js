@@ -12,6 +12,10 @@ export default function Home() {
       onPress={()=>{navigation.navigate('ManagerConnection')}}>
         <Text>GotoConnection</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+      onPress={()=>{navigation.navigate('ManagerProductInterface')}}>
+        <Text>Go to MPI</Text>
+      </TouchableOpacity>
     </View>
   );
 }
