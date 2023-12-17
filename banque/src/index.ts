@@ -1,14 +1,14 @@
 import express from 'express';
-import { AdminsRoute } from './routes/admins.route';
+import { TransactionRoute } from './routes/transaction.route';
 
 const app = express();
 const PORT = 5001;
 
 app.use(express.json());
 
-const adminsRoute = new AdminsRoute();
+const adminsRoute = new TransactionRoute();
 
-app.use('/api/admins', adminsRoute.getRouter());
+app.use('/api/transactions', adminsRoute.getRouter());
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Bank-route API!');
@@ -18,5 +18,4 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
-  console.log("IsWorking");
 });
