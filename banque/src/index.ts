@@ -1,5 +1,5 @@
 import express from 'express';
-import { AdminsRoute } from './src/routes/admins.route';
+import { AdminsRoute } from './routes/admins.route';
 
 const app = express();
 const PORT = 5001;
