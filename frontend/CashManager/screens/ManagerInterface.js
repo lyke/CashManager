@@ -36,7 +36,7 @@ export default function ManagerInterface() {
   };
   const goToCategory = (category) => {
     
-      navigation.navigate('ManagerProductInterface');
+      navigation.navigate('ManagerCategoryInterface');
   };
   const addCategory = () => {
     setCategories([...categories, { name: newCategory }]);
@@ -56,7 +56,7 @@ export default function ManagerInterface() {
 
       {categories.map((category, index) => {
         return (
-          <View style={styles.categoryContainer}>
+          <View key={index} style={styles.categoryContainer}>
             <TouchableOpacity key={index} onPress={goToCategory}>
               <Text style={styles.categoryText}>{category.name}</Text>
             </TouchableOpacity>
