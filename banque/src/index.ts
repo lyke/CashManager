@@ -1,6 +1,7 @@
 import express from 'express';
 import mysql from 'mysql';
 import { TransactionRoute } from './routes/transaction.route';
+import { AccountsRoute } from './routes/accounts.route'
 
 const app = express();
 const PORT = 5001;
@@ -24,9 +25,11 @@ db.connect((err) => {
 });
 
 
-const adminsRoute = new TransactionRoute(db);
+const transactionRoute = new TransactionRoute(db);
+const accountRoute = new AccountsRoute(db)
 
-app.use('/api/transactions', adminsRoute.getRouter());
+app.use('/api/transactions', transactionRoute.getRouter());
+app.use('/api/accounts', accountRoute.getRouter());
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Bank-route API!');

@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import { AccountController } from '../controllers/account.controller';
 
-export class AdminsRoute {
+export class AccountsRoute {
   private api: Router = express.Router();
   private readonly adminsController: AccountController;
 

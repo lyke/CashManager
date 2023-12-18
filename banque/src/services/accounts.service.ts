@@ -7,6 +7,8 @@ export class AccountsService {
   }
 
   async removeFromAccount(idToDebit: number, amount: number) {
+    let account = await this.accountDao.getAccountById(idToDebit)
+    console.log("money" + account.money)
     return false
   }
 
