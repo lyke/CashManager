@@ -9,7 +9,7 @@ export default function Home() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <TouchableOpacity
-      onPress={()=>{navigation.navigate('Connection')}}>
+      onPress={()=>{navigation.navigate('ManagerConnection')}}>
         <Text>GotoConnection</Text>
       </TouchableOpacity>
     </View>
