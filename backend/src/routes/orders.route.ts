@@ -16,7 +16,7 @@ export class OrdersRoute {
 
   private routes(): void {
     this.api.get(
-      '/',
+      "/",
       this.ordersController.getAllOrders.bind(this.ordersController)
     );
 
