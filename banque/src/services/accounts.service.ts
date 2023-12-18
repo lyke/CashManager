@@ -1,9 +1,9 @@
-
+import { AccountDao } from '../dao/account.dao'
 export class AccountsService {
-  // private adminsDao: AdminsDao;
+  private adminsDao: AccountDao;
 
   constructor(db: any) {
-    // this.adminsDao = new AdminsDao(db);
+    this.adminsDao = new AccountDao(db);
   }
 
   async removeFromAccount(idToDebit: number, amount: number) {
