@@ -1,8 +1,8 @@
 import express from 'express';
-import { ProductsRoute } from './src/routes/products.route.ts';
-import { OrdersRoute } from './src/routes/orders.route.ts';
+import { ProductsRoute } from './src/routes/products.route';
+import { OrdersRoute } from './src/routes/orders.route';
 import mysql from 'mysql';
-import { AdminsRoute } from './src/routes/admins.route.ts';
+import { AdminsRoute } from './src/routes/admins.route';
 
 const app = express();
 const PORT = 5000;
