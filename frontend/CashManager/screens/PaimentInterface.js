@@ -6,9 +6,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function BillInterface() {
+export default function PaimentInterface() {
 
   const navigation = useNavigation();
   const [bill, setBill] = React.useState([
@@ -30,38 +29,17 @@ export default function BillInterface() {
     }
   ]);
 
-  const deleteProduct = (productToDelete) => {
-    const updatedBill = bill.filter((product) => product.name !== productToDelete.name);
-    setBill(updatedBill);
-  };
-
   return (
 
     <View style={styles.container}>
-      <Text style={styles.title}>Bill</Text>
+      <Text style={styles.title}>Paiment</Text>
 
-      {bill.map((product, index) => {
-        return (
-          <View style={styles.categoryContainer}>
-            <Text key={product.name} style={styles.categoryText}>{product.name}</Text>
-            <Text key={product.price} style={styles.categoryText}>{product.price} €</Text>
-            <TouchableOpacity key={product.index} onPress={() => deleteProduct(product)}>
-              <Icon name="times" size={30} color="black"/>
-            </TouchableOpacity>
-          </View>
-        );
-      })}
+      <Text style={styles.categoryContainer}>{bill.reduce((price,product) =>  price = price + product.price , 0 )} €</Text>
+
 
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('PaimentInterface');
-                        }}>
-        <Text>Procéder au paiement</Text>
-        <Text>{bill.reduce((price,product) =>  price = price + product.price , 0 )} €</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}
-                        onPress={() => {
-                          navigation.navigate('Home');
+                          navigation.navigate('BillInterface');
                         }}>
         <Text>Précédent</Text>
       </TouchableOpacity>
