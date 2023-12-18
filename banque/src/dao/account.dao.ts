@@ -1,5 +1,5 @@
 export class AccountDao {
-  private tableName: string = "account"
+  private readonly tableName: string = "account"
   constructor(private db: any) {}
 
   public async getAccountById(id: number): Promise<any> {

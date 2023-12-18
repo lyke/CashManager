@@ -5,8 +5,8 @@ export class TransactionRoute {
   private api: Router = express.Router();
   private readonly usersController: TransactionController;
 
-  constructor() {
-    this.usersController = new TransactionController(null);
+  constructor(db: any) {
+    this.usersController = new TransactionController(db);
     this.routes();
   }
 
