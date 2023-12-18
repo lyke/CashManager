@@ -28,6 +28,7 @@ connection.connect((err) => {
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(255),
             price DECIMAL(10, 2),
+            category VARCHAR(255),
             image VARCHAR(255),
             description TEXT
           )
@@ -44,7 +45,7 @@ connection.connect((err) => {
         const createTableOrdersQuery = `
           CREATE TABLE IF NOT EXISTS \`order\` (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            desc VARCHAR(255)
+            \`desc\` VARCHAR(255)
           )
         `;
 

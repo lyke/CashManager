@@ -1,3 +1,5 @@
+import { Admin } from '../types/admin';
+
 export class AdminsDao {
   constructor(private db: any) {}
 
