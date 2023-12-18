@@ -237,7 +237,7 @@ export default function Home() {
 
         <TouchableOpacity
         style={styles.payButton}
-        onPress={()=>{navigation.navigate('ManagerConnection')}}>
+        onPress={()=>{navigation.navigate('BillInterface')}}>
           <Text>Payer</Text>
         </TouchableOpacity>
       </View>
