@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './screens/Home';
+import ManagerConnection from './screens/ManagerConnection';
+import ManagerCategoryInterface from './screens/ManagerCategoryInterface';
+import ManagerProductInterface from './screens/ManagerProductInterface';
+import BillInterface from './screens/BillInterface';
+import ManagerInterface from './screens/ManagerInterface';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+        <Stack.Screen name="BillInterface" component={BillInterface} options={{headerShown: false}} />
+        <Stack.Screen name="ManagerConnection" component={ManagerConnection} options={{headerShown: false}} />
+        <Stack.Screen name="ManagerInterface" component={ManagerInterface} options={{headerShown: false}} />
+        <Stack.Screen name="ManagerCategoryInterface" component={ManagerCategoryInterface} options={{headerShown: false}} />
+        <Stack.Screen name="ManagerProductInterface" component={ManagerProductInterface} options={{headerShown: false}} />
+        {/* <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

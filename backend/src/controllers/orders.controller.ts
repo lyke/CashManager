@@ -27,8 +27,8 @@ export class OrdersController {
       res.status(200).json(order);
     }
     catch (error) {
-      console.error('Erreur lors de la récupération du produit : ', error);
-      res.status(500).json({ error: 'Erreur lors de la récupération du produit' });
+      console.error('Erreur lors de la récupération du order : ', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération du order' });
       next(error);
     }
   }
@@ -40,8 +40,8 @@ export class OrdersController {
       res.status(200).json(order);
     }
     catch (error) {
-      console.error('Erreur lors de la création du produit : ', error);
-      res.status(500).json({ error: 'Erreur lors de la création du produit' });
+      console.error('Erreur lors de la création du order : ', error);
+      res.status(500).json({ error: 'Erreur lors de la création du order' });
       next(error);
     }
   }
@@ -53,8 +53,8 @@ export class OrdersController {
       res.status(200).json(order);
     }
     catch (error) {
-      console.error('Erreur lors de la mise à jour du produit : ', error);
-      res.status(500).json({ error: 'Erreur lors de la mise à jour du produit' });
+      console.error('Erreur lors de la mise à jour du order : ', error);
+      res.status(500).json({ error: 'Erreur lors de la mise à jour du order' });
       next(error);
     }
   }
@@ -66,8 +66,8 @@ export class OrdersController {
       res.status(200).json(order)
     }
     catch (error) {
-      console.error('Erreur lors de la suppression du produit : ', error);
-      res.status(500).json({ error: 'Erreur lors de la suppression du produit' });
+      console.error('Erreur lors de la suppression du order : ', error);
+      res.status(500).json({ error: 'Erreur lors de la suppression du order' });
       next(error);
     }
   }
