@@ -1,0 +1,74 @@
+import { NextFunction, Request, Response } from 'express';
+import { AccountsService } from '../services/accounts.service'
+
+export class AccountController {
+  private accountsService: AccountsService;
+
+  constructor(db: any) {
+    this.accountsService = new AccountsService(db);
+  }
+
+  public async getAllAccounts(req: Request, res: Response, next: NextFunction) {
+    try {
+      const admins = await this.accountsService.getAllAccounts();
+
+      res.status(200).json(admins);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des ordres : ', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération des ordres' });
+      next(error);
+    }
+  }
+
+  public async getAccountById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const admin = await this.accountsService.getAccountById(Number(req.params.id));
+
+      res.status(200).json(admin);
+    }
+    catch (error) {
+      console.error('Erreur lors de la récupération du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération du produit' });
+      next(error);
+    }
+  }
+
+  public async createAccount(req: Request, res: Response, next: NextFunction) {
+    try {
+      const admin = await this.accountsService.createAccount(req.body);
+
+      res.status(200).json(admin);
+    }
+    catch (error) {
+      console.error('Erreur lors de la création du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la création du produit' });
+      next(error);
+    }
+  }
+
+  public async updateAccount(req: Request, res: Response, next: NextFunction) {
+    try {
+      const admin = await this.accountsService.updateAccount(Number(req.params.id), req.body);
+
+      res.status(200).json(admin);
+    }
+    catch (error) {
+      console.error('Erreur lors de la mise à jour du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la mise à jour du produit' });
+      next(error);
+    }
+  }
+
+  public async deleteAccount(req: Request, res: Response, next: NextFunction) {
+    try {
+      const admin = await this.accountsService.deleteAccount(Number(req.params.id));
+
+      res.status(200).json(admin)
+    }
+    catch (error) {
+      console.error('Erreur lors de la suppression du produit : ', error);
+      res.status(500).json({ error: 'Erreur lors de la suppression du produit' });
+      next(error);
+    }
+  }
+}

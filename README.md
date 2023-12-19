@@ -16,11 +16,17 @@ Welcome to the Cash Manager repository.
 
 >The commands are available in package.json.
 
-##### Starting MySQL server
+##### SetUp MySQL server
 
-    $ sudo mysql -u root -p
-    ou
-    $ mysql -u root -p
+create the database and run the insertion script.
+
+- connect to mysql `sudo mysql -u root -p`
+- change authentication method and create database
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'BoisdeCen2&*';
+CREATE DATABASE cash_manager_db;
+```
+- run `node db.ts` 
 
 ##### Eslint
 
