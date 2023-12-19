@@ -1,9 +1,12 @@
+import * as mysql from 'mysql';
+
 import { AdminsDao } from "../dao/admins.dao";
+import { Admin } from "../types/admin";
 
 export class AdminsService {
   private adminsDao: AdminsDao;
 
-  constructor(db: any) {
+  constructor(db: mysql.Connection) {
     this.adminsDao = new AdminsDao(db);
   }
 
@@ -15,11 +18,11 @@ export class AdminsService {
     return this.adminsDao.getAdminById(id);
   }
 
-  public async createAdmin(admin: any) { // typer admin
+  public async createAdmin(admin: Admin) {
     return this.adminsDao.createAdmin(admin);
   }
 
-  public async updateAdmin(id: number, admin: any) { // typer admin
+  public async updateAdmin(id: number, admin: Admin) {
     return this.adminsDao.updateAdmin(id, admin);
   }
 

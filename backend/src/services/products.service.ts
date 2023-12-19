@@ -1,8 +1,11 @@
+import * as mysql from 'mysql';
+
 import { ProductsDao } from '../dao/products.dao';
+import { Product } from '../types/product';
 export class ProductsService {
   private productsDao: ProductsDao;
 
-  constructor(db: any) {
+  constructor(db: mysql.Connection) {
     this.productsDao = new ProductsDao(db);
   }
 
@@ -14,11 +17,11 @@ export class ProductsService {
     return this.productsDao.getProductById(id);
   }
 
-  public async createProduct(product: any) { // typer Product
+  public async createProduct(product: Product) {
     return this.productsDao.createProduct(product);
   }
 
-  public async updateProduct(id: number, product: any) { // typer Product
+  public async updateProduct(id: number, product: Product) {
     return this.productsDao.updateProduct(id, product);
   }
 

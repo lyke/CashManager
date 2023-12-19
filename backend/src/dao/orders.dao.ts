@@ -1,11 +1,15 @@
-export class OrdersDao {
-  constructor(private db: any) {}
+import * as mysql from 'mysql';
 
-  public async getAllOrders(): Promise<any> {
+import { DeleteOrderResponse, Order } from '../types/order';
+
+export class OrdersDao {
+  constructor(private db: mysql.Connection) {}
+
+  public async getAllOrders(): Promise<Order[]> {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM `order`';
 
-      this.db.query(query, (error: any, results: any[]) => {
+      this.db.query(query, (error: mysql.MysqlError | null, results: Order[]) => {
         if (error) {
           reject(error);
         } else {
@@ -16,11 +20,11 @@ export class OrdersDao {
   }
 
 
-  public async getOrderById(id: number): Promise<any> {
+  public async getOrderById(id: number): Promise<Order> {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM `order` WHERE id = ?';
 
-      this.db.query(query, [id], (error: any, results: any[]) => {
+      this.db.query(query, [id], (error: mysql.MysqlError | null, results: Order) => {
         if (error) {
           reject(error);
         } else {
@@ -30,11 +34,11 @@ export class OrdersDao {
     });
   }
 
-  public async createOrder(order: any): Promise<any> { // typer Order
+  public async createOrder(order: Order): Promise<Order> {
     return new Promise((resolve, reject) => {
       const query = 'INSERT INTO `order` SET ?';
 
-      this.db.query(query, [order], (error: any, results: any) => {
+      this.db.query(query, [order], (error: mysql.MysqlError | null, results: Order) => {
         if (error) {
           reject(error);
         } else {
@@ -44,11 +48,11 @@ export class OrdersDao {
     });
   }
 
-  public async updateOrder(id: number, order: any): Promise<any> { // typer order
+  public async updateOrder(id: number, order: Order): Promise<Order> {
     return new Promise((resolve, reject) => {
       const query = 'UPDATE `order` SET ? WHERE id = ?';
 
-      this.db.query(query, [order, id], (error: any) => {
+      this.db.query(query, [order, id], (error: mysql.MysqlError | null) => {
         if (error) {
           reject(error);
         } else {
@@ -58,11 +62,11 @@ export class OrdersDao {
     });
   }
 
-  public async deleteOrder(id: number): Promise<any> {
-    return new Promise((resolve, reject) => {
+  public async deleteOrder(id: number): Promise<DeleteOrderResponse> {
+    return new Promise<DeleteOrderResponse>((resolve, reject) => {
       const query = 'DELETE FROM `order` WHERE id = ?';
 
-      this.db.query(query, [id], (error: any) => {
+      this.db.query(query, [id], (error: mysql.MysqlError | null) => {
         if (error) {
           reject(error);
         } else {
