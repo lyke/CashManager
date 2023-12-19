@@ -8,11 +8,18 @@ export class AccountsService {
 
   async removeFromAccount(idToDebit: number, amount: number) {
     let account = await this.accountDao.getAccountById(idToDebit)
-    console.log("money" + account.money)
-    return false
+
+    if ( !account.money || account.money < amount) { return  false }
+
+    account.money -= amount
+    await this.accountDao.updateAccount(idToDebit, account)
+    return true
   }
 
-  addToAccount(idToCredit: number, amount: number) {
+  async addToAccount(idToCredit: number, amount: number) {
+    let account = await this.accountDao.getAccountById(idToCredit)
+    account.money += amount
+    await this.accountDao.updateAccount(idToCredit, account)
   }
 
   async getAllAccounts() {
