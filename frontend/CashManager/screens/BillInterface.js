@@ -1,15 +1,16 @@
 import {
   Text,
-  StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Style from '../styles/style';
 
 export default function BillInterface() {
 
+  const styles = Style;
   const navigation = useNavigation();
   const [bill, setBill] = React.useState([
     {
@@ -38,9 +39,11 @@ export default function BillInterface() {
   return (
 
     <View style={styles.container}>
-      <Text style={styles.title}>Bill</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Bill</Text>
+      </View>
 
-      {bill.map((product, index) => {
+      {bill.map((product) => {
         return (
           <View style={styles.categoryContainer}>
             <Text key={product.name} style={styles.categoryText}>{product.name}</Text>
@@ -51,63 +54,19 @@ export default function BillInterface() {
           </View>
         );
       })}
-
       <TouchableOpacity style={styles.button}
                         onPress={() => {
                           navigation.navigate('PaimentInterface');
                         }}>
-        <Text>Procéder au paiement</Text>
-        <Text>{bill.reduce((price,product) =>  price = price + product.price , 0 )} €</Text>
+        <Text style={styles.buttonText}>Procéder au paiement</Text>
+        <Text style={styles.buttonText}>{bill.reduce((price, product) => price = price + product.price, 0)} €</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}
+      <TouchableOpacity style={styles.endButton}
                         onPress={() => {
                           navigation.navigate('Home');
                         }}>
-        <Text>Précédent</Text>
+        <Text style={styles.buttonText}>Précédent</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingHorizontal: 20,
-
-    },
-    title: {
-      fontSize: 24,
-      borderRadius: 10,
-      width: '100%',
-      textAlign: 'center',
-      marginBottom: 20,
-      backgroundColor: '#c0dcb5',
-    },
-    categoryContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginBottom: 10,
-      backgroundColor: '#eff5c6',
-      borderRadius: 10,
-      width: '80%',
-      height: '5%'
-    },
-    categoryText: {
-      fontSize: 18,
-    },
-    button: {
-      borderRadius: 20,
-      padding:
-        10,
-      elevation:
-        2,
-      width: '100%',
-      textAlign: 'center',
-      marginBottom: 20,
-      backgroundColor: '#729365',
-    }
-  })
-;

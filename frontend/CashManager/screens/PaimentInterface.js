@@ -1,20 +1,18 @@
 import {
   Text,
-  StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Camera } from 'expo-camera';
 import Style from '../styles/style';
 
 export default function PaimentInterface() {
 
   const styles = Style;
   const navigation = useNavigation();
-  const [bill, setBill] = React.useState([
+  const [bill] = React.useState([
     {
       name: 'Burger poulet',
       price: 6,
@@ -32,7 +30,6 @@ export default function PaimentInterface() {
       price: 6,
     }
   ]);
-
 
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -63,44 +60,46 @@ export default function PaimentInterface() {
     );
   };
 
-
   return (
 
     <View style={styles.container}>
-      <Text style={styles.title}>Paiment</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Paiment</Text>
+      </View><View style={styles.categoryContainer}>
+      <Text style={styles.categoryText}>
+        {bill.reduce((price, product) => price = price + product.price, 0)} €
+      </Text>
+</View>
 
-      <Text
-        style={styles.categoryContainer}>{bill.reduce((price, product) => price = price + product.price, 0)} €</Text>
-
-      { hasPermission === null ?
-          <View/>
+      {hasPermission === null ?
+        <View/>
         : hasPermission === false ?
           <View style={styles.container}>
-            <Text style={styles.text}>Camera permission not granted</Text>
+            <Text style={styles.categoryText}>Camera permission not granted</Text>
           </View>
-        : <View style={styles.container}>
-            <Text style={styles.title}>Paiement par QRCode : </Text>
-            <Text style={styles.paragraph}>Veuillez scannez votre carte de paiement.</Text>
+          : <View>
+            <Text  style={styles.categoryText}>Paiement par QRCode : </Text>
+            <Text  style={styles.categoryText}>Veuillez scannez votre carte de paiement</Text>
             {renderCamera()}
-          {/* <TouchableOpacity */}
-          {/*   style={styles.button} */}
-          {/*   onPress={() => setScanned(false)} */}
-          {/*   disabled={scanned} */}
-          {/* > */}
-          {/* </TouchableOpacity> */}
-        </View>
+            {/* <TouchableOpacity */}
+            {/*   style={styles.button} */}
+            {/*   onPress={() => setScanned(false)} */}
+            {/*   disabled={scanned} */}
+            {/* > */}
+            {/* </TouchableOpacity> */}
+          </View>
       }
       <TouchableOpacity style={styles.button}
                         onPress={() => {
                           navigation.navigate('BillInterface');
                         }}>
-        <Text>Payer en espèce</Text>
+        <Text style={styles.buttonText}>Payer en espèce</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}
                         onPress={() => {
                           navigation.navigate('BillInterface');
                         }}>
-        <Text>Précédent</Text>
+        <Text style={styles.buttonText}>Précédent</Text>
       </TouchableOpacity>
     </View>
   );
