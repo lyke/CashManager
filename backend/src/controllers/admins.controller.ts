@@ -1,10 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
+import * as mysql from 'mysql';
+
 import { AdminsService } from '../services/admins.service';
 
 export class AdminsController {
   private adminsService: AdminsService;
 
-  constructor(db: any) {
+  constructor(db: mysql.Connection) {
     this.adminsService = new AdminsService(db);
   }
 
@@ -14,7 +16,7 @@ export class AdminsController {
 
       res.status(200).json(admins);
     } catch (error) {
-      console.error('Erreur lors de la récupération des ordres : ', error);
+      console.error('AdminsController.getAllAdmins - Erreur lors de la récupération des ordres : ', error);
       res.status(500).json({ error: 'Erreur lors de la récupération des ordres' });
       next(error);
     }
@@ -27,7 +29,7 @@ export class AdminsController {
       res.status(200).json(admin);
     }
     catch (error) {
-      console.error('Erreur lors de la récupération du produit : ', error);
+      console.error('AdminsController.getAdminById - Erreur lors de la récupération du produit : ', error);
       res.status(500).json({ error: 'Erreur lors de la récupération du produit' });
       next(error);
     }
@@ -40,7 +42,7 @@ export class AdminsController {
       res.status(200).json(admin);
     }
     catch (error) {
-      console.error('Erreur lors de la création du produit : ', error);
+      console.error('AdminsController.createAdmin - Erreur lors de la création du produit : ', error);
       res.status(500).json({ error: 'Erreur lors de la création du produit' });
       next(error);
     }
@@ -53,7 +55,7 @@ export class AdminsController {
       res.status(200).json(admin);
     }
     catch (error) {
-      console.error('Erreur lors de la mise à jour du produit : ', error);
+      console.error('AdminsController.updateAdmin - Erreur lors de la mise à jour du produit : ', error);
       res.status(500).json({ error: 'Erreur lors de la mise à jour du produit' });
       next(error);
     }
@@ -66,7 +68,7 @@ export class AdminsController {
       res.status(200).json(admin)
     }
     catch (error) {
-      console.error('Erreur lors de la suppression du produit : ', error);
+      console.error('AdminsController.deleteAdmin - Erreur lors de la suppression du produit : ', error);
       res.status(500).json({ error: 'Erreur lors de la suppression du produit' });
       next(error);
     }

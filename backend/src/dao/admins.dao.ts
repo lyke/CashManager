@@ -1,25 +1,31 @@
-export class AdminsDao {
-  constructor(private db: any) {}
+import * as mysql from 'mysql';
 
-  public async getAllAdmins(): Promise<any> {
+import { Admin, DeleteAdminResponse } from '../types/admin';
+
+export class AdminsDao {
+  constructor(private db: mysql.Connection) {}
+
+  public async getAllAdmins(): Promise<Admin[]> {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM admin';
 
-      this.db.query(query, (error: any, results: any[]) => {
+      this.db.query(query, (error: mysql.MysqlError | null, results: Admin[]) => {
         if (error) {
           reject(error);
         } else {
           resolve(results);
         }
       });
+
+
     });
   }
 
-  public async getAdminById(id: number): Promise<any> {
+  public async getAdminById(id: number): Promise<Admin> {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM admin WHERE id = ?';
 
-      this.db.query(query, [id], (error: any, results: any[]) => {
+      this.db.query(query, [id], (error: mysql.MysqlError | null, results: Admin) => {
         if (error) {
           reject(error);
         } else {
@@ -29,11 +35,11 @@ export class AdminsDao {
     });
   }
 
-  public async createAdmin(admin: any): Promise<any> { // typer admin
+  public async createAdmin(admin: Admin): Promise<Admin> {
     return new Promise((resolve, reject) => {
       const query = 'INSERT INTO admin SET ?';
 
-      this.db.query(query, [admin], (error: any, results: any) => {
+      this.db.query(query, [admin], (error: mysql.MysqlError | null, results: Admin) => {
         if (error) {
           reject(error);
         } else {
@@ -43,11 +49,11 @@ export class AdminsDao {
     });
   }
 
-  public async updateAdmin(id: number, admin: any): Promise<any> { // typer admin
+  public async updateAdmin(id: number, admin: Admin): Promise<Admin> {
     return new Promise((resolve, reject) => {
       const query = 'UPDATE admin SET ? WHERE id = ?';
 
-      this.db.query(query, [admin, id], (error: any) => {
+      this.db.query(query, [admin, id], (error: mysql.MysqlError | null) => {
         if (error) {
           reject(error);
         } else {
@@ -57,11 +63,11 @@ export class AdminsDao {
     });
   }
 
-  public async deleteAdmin(id: number): Promise<any> {
-    return new Promise((resolve, reject) => {
+  public async deleteAdmin(id: number): Promise<DeleteAdminResponse> {
+    return new Promise<DeleteAdminResponse>((resolve, reject) => {
       const query = 'DELETE FROM admin WHERE id = ?';
 
-      this.db.query(query, [id], (error: any) => {
+      this.db.query(query, [id], (error: mysql.MysqlError | null) => {
         if (error) {
           reject(error);
         } else {

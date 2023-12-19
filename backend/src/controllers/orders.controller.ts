@@ -1,10 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
+import * as mysql from 'mysql';
+
 import { OrdersService } from '../services/orders.service';
 
 export class OrdersController {
   private ordersService: OrdersService;
 
-  constructor(db: any) {
+  constructor(db: mysql.Connection) {
     this.ordersService = new OrdersService(db);
   }
 
@@ -14,7 +16,7 @@ export class OrdersController {
 
       res.status(200).json(orders);
     } catch (error) {
-      console.error('Erreur lors de la récupération des ordres : ', error);
+      console.error('OrdersController.getAllOrders - Erreur lors de la récupération des ordres : ', error);
       res.status(500).json({ error: 'Erreur lors de la récupération des ordres' });
       next(error);
     }
@@ -27,7 +29,7 @@ export class OrdersController {
       res.status(200).json(order);
     }
     catch (error) {
-      console.error('Erreur lors de la récupération du order : ', error);
+      console.error('OrdersController.getOrderById - Erreur lors de la récupération du order : ', error);
       res.status(500).json({ error: 'Erreur lors de la récupération du order' });
       next(error);
     }
@@ -40,7 +42,7 @@ export class OrdersController {
       res.status(200).json(order);
     }
     catch (error) {
-      console.error('Erreur lors de la création du order : ', error);
+      console.error('OrdersController.createOrder - Erreur lors de la création du order : ', error);
       res.status(500).json({ error: 'Erreur lors de la création du order' });
       next(error);
     }
@@ -53,7 +55,7 @@ export class OrdersController {
       res.status(200).json(order);
     }
     catch (error) {
-      console.error('Erreur lors de la mise à jour du order : ', error);
+      console.error('OrdersController.updateOrder - Erreur lors de la mise à jour du order : ', error);
       res.status(500).json({ error: 'Erreur lors de la mise à jour du order' });
       next(error);
     }
@@ -66,7 +68,7 @@ export class OrdersController {
       res.status(200).json(order)
     }
     catch (error) {
-      console.error('Erreur lors de la suppression du order : ', error);
+      console.error('OrdersController.deleteOrder - Erreur lors de la suppression du order : ', error);
       res.status(500).json({ error: 'Erreur lors de la suppression du order' });
       next(error);
     }
