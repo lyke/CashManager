@@ -1,11 +1,15 @@
-export class ProductsDao {
-  constructor(private db: any) {}
+import * as mysql from 'mysql';
 
-  public async getAllProducts(): Promise<any> {
+import { DeleteProductResponse, Product } from '../types/product';
+
+export class ProductsDao {
+  constructor(private db: mysql.Connection) {}
+
+  public async getAllProducts(): Promise<Product[]> {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM product';
 
-      this.db.query(query, (error: any, results: any[]) => {
+      this.db.query(query, (error: mysql.MysqlError | null, results: Product[]) => {
         if (error) {
           reject(error);
         } else {
@@ -15,11 +19,11 @@ export class ProductsDao {
     });
   }
 
-  public async getProductById(id: number): Promise<any> {
+  public async getProductById(id: number): Promise<Product> {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM product WHERE id = ?';
 
-      this.db.query(query, [id], (error: any, results: any[]) => {
+      this.db.query(query, [id], (error: mysql.MysqlError | null, results: Product) => {
         if (error) {
           reject(error);
         } else {
@@ -29,11 +33,11 @@ export class ProductsDao {
     });
   }
 
-  public async createProduct(product: any): Promise<any> { // typer Product
+  public async createProduct(product: Product): Promise<Product> {
     return new Promise((resolve, reject) => {
       const query = 'INSERT INTO product SET ?';
 
-      this.db.query(query, [product], (error: any, results: any) => {
+      this.db.query(query, [product], (error: mysql.MysqlError | null, results: Product) => {
         if (error) {
           reject(error);
         } else {
@@ -43,11 +47,11 @@ export class ProductsDao {
     });
   }
 
-  public async updateProduct(id: number, product: any): Promise<any> { // typer Product
+  public async updateProduct(id: number, product: Product): Promise<Product> {
     return new Promise((resolve, reject) => {
       const query = 'UPDATE product SET ? WHERE id = ?';
 
-      this.db.query(query, [product, id], (error: any) => {
+      this.db.query(query, [product, id], (error: mysql.MysqlError | null) => {
         if (error) {
           reject(error);
         } else {
@@ -57,11 +61,11 @@ export class ProductsDao {
     });
   }
 
-  public async deleteProduct(id: number): Promise<any> {
+  public async deleteProduct(id: number): Promise<DeleteProductResponse> {
     return new Promise((resolve, reject) => {
       const query = 'DELETE FROM product WHERE id = ?';
 
-      this.db.query(query, [id], (error: any) => {
+      this.db.query(query, [id], (error: mysql.MysqlError | null) => {
         if (error) {
           reject(error);
         } else {

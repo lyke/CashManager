@@ -1,10 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
+import * as mysql from 'mysql';
+
 import { ProductsService } from '../services/products.service';
 
 export class ProductsController {
   private productsService: ProductsService;
 
-  constructor(db: any) {
+  constructor(db: mysql.Connection) {
     this.productsService = new ProductsService(db);
   }
 
@@ -14,7 +16,7 @@ export class ProductsController {
 
       res.status(200).json(products);
     } catch (error) {
-      console.error('Erreur lors de la récupération des produits : ', error);
+      console.error('ProductsController.getAllProducts - Erreur lors de la récupération des produits : ', error);
       res.status(500).json({ error: 'Erreur lors de la récupération des produits' });
       next(error);
     }
@@ -27,7 +29,7 @@ export class ProductsController {
       res.status(200).json(product);
     }
     catch (error) {
-      console.error('Erreur lors de la récupération du produit : ', error);
+      console.error('ProductsController.getProductById - Erreur lors de la récupération du produit : ', error);
       res.status(500).json({ error: 'Erreur lors de la récupération du produit' });
       next(error);
     }
@@ -40,7 +42,7 @@ export class ProductsController {
       res.status(200).json(product);
     }
     catch (error) {
-      console.error('Erreur lors de la création du produit : ', error);
+      console.error('ProductsController.createProduct - Erreur lors de la création du produit : ', error);
       res.status(500).json({ error: 'Erreur lors de la création du produit' });
       next(error);
     }
@@ -53,7 +55,7 @@ export class ProductsController {
       res.status(200).json(product);
     }
     catch (error) {
-      console.error('Erreur lors de la mise à jour du produit : ', error);
+      console.error('ProductsController.updateProduct - Erreur lors de la mise à jour du produit : ', error);
       res.status(500).json({ error: 'Erreur lors de la mise à jour du produit' });
       next(error);
     }
@@ -66,7 +68,7 @@ export class ProductsController {
       res.status(200).json(product);
     }
     catch (error) {
-      console.error('Erreur lors de la suppression du produit : ', error);
+      console.error('ProductsController.deleteProduct - Erreur lors de la suppression du produit : ', error);
       res.status(500).json({ error: 'Erreur lors de la suppression du produit' });
       next(error);
     }
