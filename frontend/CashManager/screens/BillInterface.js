@@ -54,7 +54,7 @@ export default function BillInterface() {
 
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('Paiment');
+                          navigation.navigate('PaimentInterface');
                         }}>
         <Text>Procéder au paiement</Text>
         <Text>{bill.reduce((price,product) =>  price = price + product.price , 0 )} €</Text>
