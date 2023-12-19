@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View, ScrollView, StyleSheet, FlatList, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ProductCard from '../components/ProductCard';
@@ -11,6 +11,21 @@ export default function Home() {
   const [lastPressTime, setLastPressTime] = useState(0);
   const [pressCount, setPressCount] = useState(0);
   const timeThreshold = 500; // 500 ms entre chaque pression
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/products');
+      const data = await response.json();
+      setProducts(data);
+  } catch (error) {
+    console.error('Error fetching products', error);
+  }
+  };
 
 
   const handlePress = () => {
@@ -28,99 +43,7 @@ export default function Home() {
     setLastPressTime(currentTime);
   };
 
-  const categories = [
-    {
-      name: 'Menu'
-    },
-    {
-      name: 'Salades'
-    },
-    {
-      name: 'Boissons'
-    },
-    {
-      name: 'Desserts'
-    }
-  ];
-  const products = [
-    {
-      id: 1,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 2,
-      name: 'Pepsi',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 3,
-      name: 'Fanta',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 4,
-      name: 'Sprite',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 5,
-      name: 'IceTea',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 6,
-      name: 'Orangina',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 7,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 8,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 9,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 10,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 11,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    }
-  ];
+
 
   const styles = StyleSheet.create({
     categoriesNavbar: {
@@ -194,26 +117,34 @@ export default function Home() {
     }
   });
 
-
-
   return (
     <View style={{alignItems: 'center'}}>
       <View style= {styles.categoriesNavbar}>
-        {categories.map((category, index) => {
+        {/* {categories.map((category, index) => {
           return <TouchableOpacity key={index} onPress={()=>{navigation.navigate('ManagerProductInterface')}}>
             <View>
               <Text>{category.name}</Text>
             </View>
           </TouchableOpacity>
-        })}
+        })} */}
       </View>
 
       <TouchableOpacity onPress={handlePress} style={{height: windowHeight*2/100, flexDirection: 'row', justifyContent: 'center', opacity: 0}}>
-        <Text>Connection</Text>
+        <Text >Connection</Text>
       </TouchableOpacity>
-
-      <View style={styles.productContainer}>
-        <FlatList
+      <View key={"jean"} style={styles.productContainer}>
+        {products.map((product, index) => {
+          {console.log(products);}
+          {console.log(product);}
+          return (
+            <View key={index}>
+          <Text>Produit</Text>
+          <Text>{product.name}</Text>
+          </View>
+          )
+          
+        })}
+        {/* <FlatList
           data={products}
           numColumns={2}
           keyExtractor={(item) => item.id.toString()}
@@ -225,7 +156,7 @@ export default function Home() {
               price={item.price}
             />
           )}
-        />
+        /> */}
       </View>
       <View style= {styles.selectionList}>
         <Text>Selection List</Text>
