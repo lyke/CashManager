@@ -16,11 +16,11 @@ export class AccountDao {
     });
   }
 
-  public async getAccountById(id: number): Promise<any> {
+  public async getAccountById(mail: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM '+this.tableName+' WHERE id = ?';
+      const query = 'SELECT * FROM '+this.tableName+' WHERE mail = ?';
 
-      this.db.query(query, [id], (error: any, results: any[]) => {
+      this.db.query(query, [mail], (error: any, results: any[]) => {
         if (error) {
           reject(error);
         } else {
@@ -38,35 +38,35 @@ export class AccountDao {
         if (error) {
           reject(error);
         } else {
-          resolve({ id: results.insertId, ...account });
+          resolve({ account });
         }
       });
     });
   }
 
-  public async updateAccount(id: number, account: any): Promise<any> {
+  public async updateAccount(mail: string, account: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      const query = 'UPDATE '+this.tableName+' SET ? WHERE id = ?';
+      const query = 'UPDATE '+this.tableName+' SET ? WHERE mail = ?';
 
-      this.db.query(query, [account, id], (error: any) => {
+      this.db.query(query, [account, mail], (error: any) => {
         if (error) {
           reject(error);
         } else {
-          resolve({ id, ...account });
+          resolve({ mail, ...account });
         }
       });
     });
   }
 
-  public async deleteAccount(id: number): Promise<any> {
+  public async deleteAccount(mail: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const query = 'DELETE FROM '+this.tableName+' WHERE id = ?';
+      const query = 'DELETE FROM '+this.tableName+' WHERE mail = ?';
 
-      this.db.query(query, [id], (error: any) => {
+      this.db.query(query, [mail], (error: any) => {
         if (error) {
           reject(error);
         } else {
-          resolve({ id });
+          resolve({ mail });
         }
       });
     });

@@ -9,12 +9,12 @@ export class TransactionController {
   }
 
   public async doTransaction(req: Request, res: Response, next: NextFunction) {
-    let idToDebit = Number(req.params.idToDebit)
-    let idToCredit = Number(req.params.idToCredit)
+    let mailToDebit = req.params.mailToDebit
+    let mailToCredit = req.params.mailToCredit
     let amount = Number(req.params.amount)
     try {
-      if (await this.usersService.removeFromAccount(idToDebit, amount)){
-        this.usersService.addToAccount(idToCredit, amount)
+      if (await this.usersService.removeFromAccount(mailToDebit, amount)){
+        this.usersService.addToAccount(mailToCredit, amount)
         res.status(200).json({message: "transaction completed"})
       } else {
         res.status(409).json({error: "debit account has no enough money to complete the transaction"})

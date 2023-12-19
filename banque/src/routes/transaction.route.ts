@@ -16,7 +16,7 @@ export class TransactionRoute {
 
   private routes(): void {
     this.api.post(
-      '/:idToDebit/:idToCredit/:amount',
+      '/:mailToDebit/:mailToCredit/:amount',
       this.usersController.doTransaction.bind(this.usersController)
     );
   }

@@ -25,7 +25,7 @@ connection.connect((err) => {
 
         const createTableAccountQuery = `
           CREATE TABLE IF NOT EXISTS account (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            mail VARCHAR(255) PRIMARY KEY,
             name VARCHAR(255),
             money DECIMAL(10, 2)
           )        `
