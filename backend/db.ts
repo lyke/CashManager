@@ -43,7 +43,8 @@ connection.connect((err) => {
 
         const createTableOrdersQuery = `
           CREATE TABLE IF NOT EXISTS \`order\` (
-            id INT AUTO_INCREMENT PRIMARY KEY
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            desc VARCHAR(255)
           )
         `;
 

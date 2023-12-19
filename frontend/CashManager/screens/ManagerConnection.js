@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ManagerConnection() {
+  const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleConnection = () => {
+    navigation.navigate('ManagerInterface')
+  }
 
   return (
     <View style={styles.container}>
@@ -28,7 +34,7 @@ export default function ManagerConnection() {
             value={password}
           />
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={handleConnection} style={styles.button}>
           <Text style={styles.buttonText}>Se connecter</Text>
         </TouchableOpacity>
       </View>
