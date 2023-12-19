@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
+  StyleSheet,
   FlatList,
   Dimensions
 } from 'react-native';
@@ -19,6 +21,21 @@ export default function Home() {
   const [lastPressTime, setLastPressTime] = useState(0);
   const [pressCount, setPressCount] = useState(0);
   const timeThreshold = 500; // 500 ms entre chaque pression
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/products');
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching products', error);
+    }
+  };
 
   const handlePress = () => {
     const currentTime = new Date().getTime();
@@ -35,157 +52,98 @@ export default function Home() {
     setLastPressTime(currentTime);
   };
 
-  const categories = [
-    {
-      name: 'Menu'
-    },
-    {
-      name: 'Salades'
-    },
-    {
-      name: 'Boissons'
-    },
-    {
-      name: 'Desserts'
-    }
-  ];
-  const products = [
-    {
-      id: 1,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 2,
-      name: 'Pepsi',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 3,
-      name: 'Fanta',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 4,
-      name: 'Sprite',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 5,
-      name: 'IceTea',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 6,
-      name: 'Orangina',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 7,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 8,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 9,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 10,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    },
-    {
-      id: 11,
-      name: 'Coca',
-      price: 2.5,
-      category: 'Boisson',
-      image: 'https://res.cloudinary.com/dwl5s1v4k/image/upload/v1702553532/caricature-hamburger-delicieux-isole_1308-134213.jpg_loqzzm.avif'
-    }
-  ];
+  const [selectedCategory, setSelectedCategory] = useState('Menus');
+
+  const handleCategoryPress = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const selectedProducts = (category) => products.filter(product => product.category === category);
+  const [productList, setProductList] = useState([]);
+  const addProductToProductList = (product) => {
+    setProductList(prevList => [...prevList, product]);
+  };
 
   return (
     <View style={styles.container}>
-      <View style={{ flexGrow: 1 }}>
-        <TouchableOpacity
-          onPress={handlePress}
-          style={{
-            // height: windowHeight * 2 / 100,
-            // flex: 'flex-end',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            opacity: 0,
-            position: 'fixed'
-          }}>
-          <Text>Connection</Text>
-        </TouchableOpacity>
-
-        <View style={styles.titleContainer}>
-          {categories.map((category, index) => {
-            return <TouchableOpacity
-              key={index}
-              onPress={() => {
-                navigation.navigate('ManagerProductInterface');
-              }}>
-              <Text style={styles.title}>{category.name}</Text>
-            </TouchableOpacity>;
-          })}
-        </View>
+      <View style={styles.categoriesNavbar}>
+        {categories.map((category, index) => {
+          return <TouchableOpacity key={index} onPress={() => handleCategoryPress(category.name)}>
+            {/* <View> */}
+            <Text>{category.name}</Text>
+            {/* </View> */}
+          </TouchableOpacity>;
+        })} */}
       </View>
 
-      <View style={styles.productContainer}>
-        <FlatList
-          data={products}
-          numColumns={2}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <ProductCard
-              key={item.id}
-              image={item.image}
-              name={item.name}
-              price={item.price}
-            />
-          )}
-        />
-      </View>
-
-      <View style={styles.selectionList}>
-        <Text>Selection List</Text>
-      </View>
-
-      <TouchableOpacity
-        style={styles.endButton}
-        onPress={() => {
-          navigation.navigate('BillInterface');
-        }}>
-        <Text style={styles.buttonText}>Payer</Text>
+      <TouchableOpacity onPress={handlePress} style={{
+        height: windowHeight * 2 / 100,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        opacity: 0
+      }}>
+        <Text>Connection</Text>
       </TouchableOpacity>
+      <View style={styles.productContainer}>
+        {/* <FlatList
+          style={styles.flatList}
+          data={selectedProducts(selectedCategory)}
+          numColumns={2}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+              <TouchableOpacity
+              onPress={()=>{addProductToProductList(item)}}>
+                <ProductCard
+                  key={item.id}
+                  image={item.image}
+                  name={item.name}
+                  price={item.price}
+                />
+              </TouchableOpacity>
+          )}
+        /> */}
+        {selectedProducts(selectedCategory)
+          .map((item) => (
+            <View>
+              <TouchableOpacity
+                key={item.id}
+                onPress={() => {
+                  addProductToProductList(item);
+                }}>
+                <ProductCard
+                  key={item.id}
+                  image={item.image}
+                  name={item.name}
+                  price={item.price}
+                />
+              </TouchableOpacity>
+            </View>
+          ))}
+      </View>
+      <ScrollView style={styles.selectionList}>
+        <Text>Ma commande :</Text>
+        {productList.map((product, index) => {
+            return <Text key={index}>- {product.name}</Text>;
+          }
+        )}
+      </ScrollView>
+      <View style={styles.totalContainer}>
+        <View style={styles.total}>
+          <Text>Total</Text>
+          <Text>
+            {productList.reduce((total, product) => total + product.price, 0)} €
+          </Text>
+        </View>
+
+        <TouchableOpacity
+          style={styles.endButton}
+          onPress={() => {
+            navigation.navigate('BillInterface');
+          }}>
+          <Text style={styles.buttonText}>Payer</Text>
+        </TouchableOpacity>
+      </View>
+
     </View>
-  )
-    ;
+  );
 }
