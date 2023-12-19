@@ -49,7 +49,7 @@ export default function PaimentInterface() {
     data
   }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    window.alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   const renderCamera = () => {
@@ -72,9 +72,6 @@ export default function PaimentInterface() {
       <Text
         style={styles.categoryContainer}>{bill.reduce((price, product) => price = price + product.price, 0)} €</Text>
 
-
-
-
       { hasPermission === null ?
           <View/>
         : hasPermission === false ?
@@ -82,19 +79,23 @@ export default function PaimentInterface() {
             <Text style={styles.text}>Camera permission not granted</Text>
           </View>
         : <View style={styles.container}>
-            <Text style={styles.title}>Welcome to the Barcode Scanner App!</Text>
-            <Text style={styles.paragraph}>Scan a barcode to start your job.</Text>
+            <Text style={styles.title}>Paiement par QRCode : </Text>
+            <Text style={styles.paragraph}>Veuillez scannez votre carte de paiement.</Text>
             {renderCamera()}
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => setScanned(false)}
-            disabled={scanned}
-          >
-            <Text style={styles.buttonText}>Scan QR to Start your job</Text>
-          </TouchableOpacity>
+          {/* <TouchableOpacity */}
+          {/*   style={styles.button} */}
+          {/*   onPress={() => setScanned(false)} */}
+          {/*   disabled={scanned} */}
+          {/* > */}
+          {/* </TouchableOpacity> */}
         </View>
       }
-
+      <TouchableOpacity style={styles.button}
+                        onPress={() => {
+                          navigation.navigate('BillInterface');
+                        }}>
+        <Text>Payer en espèce</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.button}
                         onPress={() => {
                           navigation.navigate('BillInterface');
