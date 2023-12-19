@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import Style from '../styles/style';
 
 export default function ManagerProductInterface() {
+
+    const styles = Style;
     const [productName, setProductName] = useState('');
     const [productPrice, setProductPrice] = useState('');
     const [productDescription, setProductDescription] = useState('');
@@ -56,41 +59,3 @@ export default function ManagerProductInterface() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#E2EBCF',
-        padding: 20,
-        borderRadius: 5,
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-        backgroundColor: '#C7DDC5',
-        padding: 10,
-        borderRadius: 5,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: 'gray',
-        padding: 10,
-        borderRadius: 5,
-        marginBottom: 10,
-        width: '80%',
-    },
-    button: {
-        backgroundColor: '#9ECDA8',
-        padding: 10,
-        borderRadius: 5,
-        alignItems: 'center',
-        marginTop: 10,
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-    },
-});

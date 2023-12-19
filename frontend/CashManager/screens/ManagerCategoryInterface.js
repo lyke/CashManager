@@ -1,11 +1,13 @@
-import { Modal,Text, StyleSheet, TouchableOpacity,View,TextInput, SafeAreaView, TouchableHighlight} from 'react-native';
+import { Modal,Text, TouchableOpacity,View,TextInput, SafeAreaView, TouchableHighlight} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Style from '../styles/style';
 
 export default function ManagerCategoryInterface() {
 
+    const styles = Style;
     const navigation = useNavigation();
     const [products, setProduct] = useState([
         {
@@ -103,61 +105,3 @@ export default function ManagerCategoryInterface() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    modal: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    modalContent: {
-        backgroundColor: 'white',
-        padding: 20,
-        borderRadius: 10,
-        elevation: 5,
-        minWidth: 300,
-        maxWidth: 400,
-        minHeight: 200,
-        maxHeight: 300,
-    },
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingHorizontal: 20,
-
-    },
-    title: {
-        fontSize: 24,
-        borderRadius: 10,
-        width: '100%',
-        textAlign: 'center',
-        marginBottom: 20,
-        backgroundColor: '#c0dcb5',
-    },
-    productContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: 10,
-        backgroundColor: '#eff5c6',
-        borderRadius: 10,
-        width: '80%',
-        height: '5%'
-    },
-    productText: {
-        fontSize: 18,
-    },
-    button: {
-        borderRadius: 20,
-        padding:
-            10,
-        elevation:
-            2,
-        width: '100%',
-        textAlign: 'center',
-        marginBottom: 20,
-        backgroundColor: '#729365',
-    }
-})
-    ;
