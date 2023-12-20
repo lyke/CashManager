@@ -5,8 +5,8 @@ import { Product } from '../types/product';
 export class ProductsService {
   private productsDao: ProductsDao;
 
-  constructor(db: mysql.Connection) {
-    this.productsDao = new ProductsDao(db);
+  constructor() {
+    this.productsDao = new ProductsDao();
   }
 
   public async getAllProducts() {

@@ -5,7 +5,7 @@ import {
   View,
   TextInput, SafeAreaView, TouchableHighlight
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useState } from 'react';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -13,22 +13,11 @@ import Style from '../styles/style';
 
 export default function ManagerInterface() {
 
-  const styles = Style;
+    const styles = Style;
+  const route = useRoute();
+  const { produit } = route.params;
   const navigation = useNavigation();
-  const [categories, setCategories] = React.useState([
-    {
-      name: 'Menu',
-    },
-    {
-      name: 'Boisson',
-    },
-    {
-      name: 'Salade',
-    },
-    {
-      name: 'Dessert',
-    }
-  ]);
+  const [categories, setCategories] = React.useState(produit.map((product) => product.category))
 
   const [newCategory, setNewCategory] = React.useState('');
   const addCategoryPopUp = () => {

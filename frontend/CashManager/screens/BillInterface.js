@@ -1,35 +1,18 @@
-import {
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {  Text,  TouchableOpacity,  View,} from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Style from '../styles/style';
 
+
 export default function BillInterface() {
 
   const styles = Style;
+  const route = useRoute();
+  const { commande } = route.params;
+  console.log(commande);
   const navigation = useNavigation();
-  const [bill, setBill] = React.useState([
-    {
-      name: 'Burger poulet',
-      price: 6,
-    },
-    {
-      name: 'Burger beef',
-      price: 6,
-    },
-    {
-      name: 'Frites small',
-      price: 6,
-    },
-    {
-      name: 'Coca small',
-      price: 6,
-    }
-  ]);
+  const [bill, setBill] = React.useState(commande);
 
   const deleteProduct = (productToDelete) => {
     const updatedBill = bill.filter((product) => product.name !== productToDelete.name);
@@ -43,7 +26,7 @@ export default function BillInterface() {
         <Text style={styles.title}>Bill</Text>
       </View>
 
-      {bill.map((product) => {
+      {bill.map((product, index) => {
         return (
           <View style={styles.categoryContainer}>
             <Text key={product.name} style={styles.categoryText}>{product.name}</Text>
@@ -56,10 +39,10 @@ export default function BillInterface() {
       })}
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('PaimentInterface');
+                          navigation.navigate('PaimentInterface',{commande:bill});
                         }}>
         <Text style={styles.buttonText}>Procéder au paiement</Text>
-        <Text style={styles.buttonText}>{bill.reduce((price, product) => price = price + product.price, 0)} €</Text>
+        <Text style={styles.buttonText}>{bill.reduce((price,product) =>  price = price + product.price , 0 )} €</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.endButton}
                         onPress={() => {

@@ -5,8 +5,8 @@ export class OrdersRoute {
   private api: Router = express.Router();
   private readonly ordersController: OrdersController;
 
-  constructor(db: any) {
-    this.ordersController = new OrdersController(db);
+  constructor() {
+    this.ordersController = new OrdersController();
     this.routes();
   }
 

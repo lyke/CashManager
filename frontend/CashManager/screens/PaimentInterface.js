@@ -3,33 +3,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import Style from '../styles/style';
 
 export default function PaimentInterface() {
+  const route = useRoute();
+  const { commande } = route.params;
 
   const styles = Style;
   const navigation = useNavigation();
-  const [bill] = React.useState([
-    {
-      name: 'Burger poulet',
-      price: 6,
-    },
-    {
-      name: 'Burger beef',
-      price: 6,
-    },
-    {
-      name: 'Frites small',
-      price: 6,
-    },
-    {
-      name: 'Coca small',
-      price: 6,
-    }
-  ]);
+  const [bill, setBill] = React.useState(commande);
 
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -70,34 +55,33 @@ export default function PaimentInterface() {
         {bill.reduce((price, product) => price = price + product.price, 0)} €
       </Text>
 </View>
-
-      {hasPermission === null ?
-        <View/>
+      { hasPermission === null ?
+          <View/>
         : hasPermission === false ?
           <View style={styles.container}>
             <Text style={styles.categoryText}>Camera permission not granted</Text>
           </View>
-          : <View>
-            <Text  style={styles.categoryText}>Paiement par QRCode : </Text>
-            <Text  style={styles.categoryText}>Veuillez scannez votre carte de paiement</Text>
+        : <View>
+            <Text style={styles.categoryText}>Paiement par QRCode : </Text>
+            <Text style={styles.categoryText}>Veuillez scannez votre carte de paiement.</Text>
             {renderCamera()}
-            {/* <TouchableOpacity */}
-            {/*   style={styles.button} */}
-            {/*   onPress={() => setScanned(false)} */}
-            {/*   disabled={scanned} */}
-            {/* > */}
-            {/* </TouchableOpacity> */}
-          </View>
+          {/* <TouchableOpacity */}
+          {/*   style={styles.button} */}
+          {/*   onPress={() => setScanned(false)} */}
+          {/*   disabled={scanned} */}
+          {/* > */}
+          {/* </TouchableOpacity> */}
+        </View>
       }
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('BillInterface');
+                          navigation.navigate('BillInterface', { commande: bill });
                         }}>
         <Text style={styles.buttonText}>Payer en espèce</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('BillInterface');
+                          navigation.navigate('BillInterface',{commande:bill});
                         }}>
         <Text style={styles.buttonText}>Précédent</Text>
       </TouchableOpacity>

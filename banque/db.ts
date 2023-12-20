@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-const mysql = require('mysql')
+const mysql = require('database')
 
 const connection = mysql.createConnection({
   host: 'localhost',
