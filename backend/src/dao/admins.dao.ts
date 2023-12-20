@@ -1,5 +1,5 @@
 import * as mysql from 'mysql';
-import { DatabaseServiceInterface } from './mysql/databaseServiceInterface';
+import { DatabaseError, DatabaseServiceInterface } from './mysql/databaseServiceInterface'
 import { MysqlService } from './mysql/mysqlService'
 
 import { Admin, DeleteAdminResponse } from '../types/admin';
@@ -14,7 +14,7 @@ export class AdminsDao {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM admin';
 
-      this.db.queryCallback(query, (error: mysql.MysqlError | null, results: Admin[]) => {
+      this.db.queryCallback(query, (error: DatabaseError | null, results: Admin[]) => {
         if (error) {
           reject(error);
         } else {
@@ -30,11 +30,15 @@ export class AdminsDao {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM admin WHERE id = ?';
 
-      this.db.queryCallbackValues(query, [id], (error: mysql.MysqlError | null, results: Admin) => {
+      this.db.queryCallbackValues(query, [id], (error: DatabaseError | null, results: Admin) => {
         if (error) {
           reject(error);
         } else {
-          resolve(results[0]);
+          if (Array.isArray(results)) {
+            resolve(results[0]);
+          } else {
+            resolve(results);
+          }
         }
       });
     });
@@ -44,7 +48,7 @@ export class AdminsDao {
     return new Promise((resolve, reject) => {
       const query = 'INSERT INTO admin SET ?';
 
-      this.db.queryCallbackValues(query, [admin], (error: mysql.MysqlError | null, results: Admin) => {
+      this.db.queryCallbackValues(query, [admin], (error: DatabaseError | null, results: Admin) => {
         if (error) {
           reject(error);
         } else {
@@ -58,7 +62,7 @@ export class AdminsDao {
     return new Promise((resolve, reject) => {
       const query = 'UPDATE admin SET ? WHERE id = ?';
 
-      this.db.queryCallbackValues(query, [admin, id], (error: mysql.MysqlError | null) => {
+      this.db.queryCallbackValues(query, [admin, id], (error: DatabaseError | null) => {
         if (error) {
           reject(error);
         } else {
@@ -72,7 +76,7 @@ export class AdminsDao {
     return new Promise<DeleteAdminResponse>((resolve, reject) => {
       const query = 'DELETE FROM admin WHERE id = ?';
 
-      this.db.queryCallbackValues(query, [id], (error: mysql.MysqlError | null) => {
+      this.db.queryCallbackValues(query, [id], (error: DatabaseError | null) => {
         if (error) {
           reject(error);
         } else {

@@ -1,15 +1,19 @@
 import * as mysql from 'mysql';
 
 import { DeleteOrderResponse, Order } from '../types/order';
+import { DatabaseError, DatabaseServiceInterface } from './mysql/databaseServiceInterface'
+import { MysqlService } from './mysql/mysqlService'
 
 export class OrdersDao {
-  constructor(private db: mysql.Connection) {}
-
+  private db: DatabaseServiceInterface
+  constructor(db: mysql.Connection) {
+    this.db = new MysqlService(db)
+  }
   public async getAllOrders(): Promise<Order[]> {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM `order`';
 
-      this.db.query(query, (error: mysql.MysqlError | null, results: Order[]) => {
+      this.db.queryCallback(query, (error: DatabaseError | null, results: Order[]) => {
         if (error) {
           reject(error);
         } else {
@@ -24,11 +28,15 @@ export class OrdersDao {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM `order` WHERE id = ?';
 
-      this.db.query(query, [id], (error: mysql.MysqlError | null, results: Order) => {
+      this.db.queryCallbackValues(query, [id], (error: DatabaseError | null, results: Order) => {
         if (error) {
           reject(error);
         } else {
-          resolve(results[0]);
+          if (Array.isArray(results)) {
+            resolve(results[0]);
+          } else {
+            resolve(results);
+          }
         }
       });
     });
@@ -38,7 +46,7 @@ export class OrdersDao {
     return new Promise((resolve, reject) => {
       const query = 'INSERT INTO `order` SET ?';
 
-      this.db.query(query, [order], (error: mysql.MysqlError | null, results: Order) => {
+      this.db.queryCallbackValues(query, [order], (error: DatabaseError | null, results: Order) => {
         if (error) {
           reject(error);
         } else {
@@ -52,7 +60,7 @@ export class OrdersDao {
     return new Promise((resolve, reject) => {
       const query = 'UPDATE `order` SET ? WHERE id = ?';
 
-      this.db.query(query, [order, id], (error: mysql.MysqlError | null) => {
+      this.db.queryCallbackValues(query, [order, id], (error: DatabaseError | null) => {
         if (error) {
           reject(error);
         } else {
@@ -66,7 +74,7 @@ export class OrdersDao {
     return new Promise<DeleteOrderResponse>((resolve, reject) => {
       const query = 'DELETE FROM `order` WHERE id = ?';
 
-      this.db.query(query, [id], (error: mysql.MysqlError | null) => {
+      this.db.queryCallbackValues(query, [id], (error: DatabaseError | null) => {
         if (error) {
           reject(error);
         } else {
