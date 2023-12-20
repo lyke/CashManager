@@ -13,11 +13,11 @@ import Style from '../styles/style';
 
 export default function ManagerInterface() {
 
-    const styles = Style;
+  const styles = Style;
   const route = useRoute();
   const { produit } = route.params;
   const navigation = useNavigation();
-  const [categories, setCategories] = React.useState(produit.map((product) => product.category))
+  const [categories, setCategories] = React.useState(produit.map((product) => product.category));
 
   const [newCategory, setNewCategory] = React.useState('');
   const addCategoryPopUp = () => {
@@ -25,7 +25,7 @@ export default function ManagerInterface() {
   };
   const goToCategory = (category) => {
 
-      navigation.navigate('ManagerCategoryInterface');
+    navigation.navigate('ManagerCategoryInterface');
   };
   const addCategory = () => {
     setCategories([...categories, { name: newCategory }]);
@@ -52,29 +52,29 @@ export default function ManagerInterface() {
               <Text style={styles.categoryText}>{category.name}</Text>
             </TouchableOpacity>
             <TouchableOpacity key={category.name} onPress={() => deleteCategory(category)}>
-              <Icon name="times" size={30} color="black" />
+              <Icon name="times" size={30} color="black"/>
             </TouchableOpacity>
           </View>
         );
       })}
 
       <TouchableOpacity style={styles.button}
-        onPress={addCategoryPopUp}>
+                        onPress={addCategoryPopUp}>
         <Text>Ajouter une catégorie</Text>
       </TouchableOpacity>
 
       <Modal style={styles.modal}
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
+             animationType="slide"
+             transparent={true}
+             visible={modalVisible}
+             onRequestClose={() => {
+               setModalVisible(!modalVisible);
+             }}>
         <SafeAreaView style={styles.modalContent}>
           <TextInput style={styles.categoryContainer}
-            onChangeText={(text) => setNewCategory(text)}
-            value={newCategory}
-            placeholder="Fruits"
+                     onChangeText={(text) => setNewCategory(text)}
+                     value={newCategory}
+                     placeholder="Fruits"
           />
           <TouchableHighlight onPress={addCategory} style={styles.button}>
             <Text style={styles.buttonText}>Submit</Text>
@@ -85,9 +85,9 @@ export default function ManagerInterface() {
       </Modal>
 
       <TouchableOpacity style={styles.button}
-        onPress={() => {
-          navigation.navigate('Home');
-        }}>
+                        onPress={() => {
+                          navigation.navigate('Home');
+                        }}>
         <Text>Déconnexion</Text>
       </TouchableOpacity>
     </View>

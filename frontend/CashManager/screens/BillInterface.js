@@ -1,9 +1,8 @@
-import {  Text,  TouchableOpacity,  View,} from 'react-native';
+import { Text, TouchableOpacity, View, } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Style from '../styles/style';
-
 
 export default function BillInterface() {
 
@@ -26,7 +25,7 @@ export default function BillInterface() {
         <Text style={styles.title}>Bill</Text>
       </View>
 
-      {bill.map((product, index) => {
+      {bill.map((product) => {
         return (
           <View style={styles.categoryContainer}>
             <Text key={product.name} style={styles.categoryText}>{product.name}</Text>
@@ -39,10 +38,11 @@ export default function BillInterface() {
       })}
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('PaimentInterface',{commande:bill});
+                          navigation.navigate('PaimentInterface', { commande: bill });
                         }}>
         <Text style={styles.buttonText}>Procéder au paiement</Text>
-        <Text style={styles.buttonText}>{bill.reduce((price,product) =>  price = price + product.price , 0 )} €</Text>
+        <Text
+          style={styles.buttonText}>{bill.reduce((price, product) => price = price + product.price, 0)} €</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.endButton}
                         onPress={() => {

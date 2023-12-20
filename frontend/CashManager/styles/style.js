@@ -1,7 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
 const { height: windowHeight } = Dimensions.get('window');
-const { width: windowWidth } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
   },
   productContainer: {
     height: windowHeight / 100 * 62,
-    flexGrow: 3,
+    // flexGrow: 1,
   },
   // productContainer: {
   //     flexDirection: 'row',

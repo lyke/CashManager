@@ -13,15 +13,15 @@ export default function ManagerConnection() {
   const [password, setPassword] = useState('');
 
   const handleConnection = () => {
-    navigation.navigate('ManagerInterface', { produit: products })
-  }
+    navigation.navigate('ManagerInterface', { produit: products });
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Espace Administrateur</Text>
       </View>
-        <View style={styles.formContainer}>
+      <View style={styles.formContainer}>
         <Text style={styles.label}>Connexion</Text>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Username</Text>

@@ -14,7 +14,7 @@ export default function PaimentInterface() {
 
   const styles = Style;
   const navigation = useNavigation();
-  const [bill, setBill] = React.useState(commande);
+  const [bill] = React.useState(commande);
 
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -54,24 +54,24 @@ export default function PaimentInterface() {
       <Text style={styles.categoryText}>
         {bill.reduce((price, product) => price = price + product.price, 0)} €
       </Text>
-</View>
-      { hasPermission === null ?
-          <View/>
+    </View>
+      {hasPermission === null ?
+        <View/>
         : hasPermission === false ?
           <View style={styles.container}>
             <Text style={styles.categoryText}>Camera permission not granted</Text>
           </View>
-        : <View>
+          : <View>
             <Text style={styles.categoryText}>Paiement par QRCode : </Text>
             <Text style={styles.categoryText}>Veuillez scannez votre carte de paiement.</Text>
             {renderCamera()}
-          {/* <TouchableOpacity */}
-          {/*   style={styles.button} */}
-          {/*   onPress={() => setScanned(false)} */}
-          {/*   disabled={scanned} */}
-          {/* > */}
-          {/* </TouchableOpacity> */}
-        </View>
+            {/* <TouchableOpacity */}
+            {/*   style={styles.button} */}
+            {/*   onPress={() => setScanned(false)} */}
+            {/*   disabled={scanned} */}
+            {/* > */}
+            {/* </TouchableOpacity> */}
+          </View>
       }
       <TouchableOpacity style={styles.button}
                         onPress={() => {
@@ -81,7 +81,7 @@ export default function PaimentInterface() {
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('BillInterface',{commande:bill});
+                          navigation.navigate('BillInterface', { commande: bill });
                         }}>
         <Text style={styles.buttonText}>Précédent</Text>
       </TouchableOpacity>
