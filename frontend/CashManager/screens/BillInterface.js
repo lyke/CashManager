@@ -1,34 +1,15 @@
-import {
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {  Text,  StyleSheet,  TouchableOpacity,  View,} from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function BillInterface() {
 
+export default function BillInterface() {
+  const route = useRoute();
+  const { commande } = route.params;
+  console.log(commande);
   const navigation = useNavigation();
-  const [bill, setBill] = React.useState([
-    {
-      name: 'Burger poulet',
-      price: 6,
-    },
-    {
-      name: 'Burger beef',
-      price: 6,
-    },
-    {
-      name: 'Frites small',
-      price: 6,
-    },
-    {
-      name: 'Coca small',
-      price: 6,
-    }
-  ]);
+  const [bill, setBill] = React.useState(commande);
 
   const deleteProduct = (productToDelete) => {
     const updatedBill = bill.filter((product) => product.name !== productToDelete.name);
@@ -54,7 +35,7 @@ export default function BillInterface() {
 
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('PaimentInterface');
+                          navigation.navigate('PaimentInterface',{commande:bill});
                         }}>
         <Text>Procéder au paiement</Text>
         <Text>{bill.reduce((price,product) =>  price = price + product.price , 0 )} €</Text>

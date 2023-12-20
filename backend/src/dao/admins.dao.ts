@@ -35,11 +35,13 @@ export class AdminsDao {
         if (error) {
           reject(error);
         } else {
+
           if (Array.isArray(results)) {
             resolve(results[0]);
           } else {
             resolve(results);
           }
+
         }
       });
     });

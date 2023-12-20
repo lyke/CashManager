@@ -19,7 +19,7 @@ export default function Home() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/products');
+      const response = await fetch('http://localhost:5001/api/products');
       const data = await response.json();
       setProducts(data);
   } catch (error) {
@@ -34,7 +34,7 @@ export default function Home() {
     if (elapsedTime <= timeThreshold) {
       setPressCount(pressCount + 1);
       if (pressCount === 4) {
-        navigation.navigate('ManagerConnection');
+        navigation.navigate('ManagerConnection', { products: products });
         setPressCount(0);
       }
     } else {
@@ -119,10 +119,13 @@ export default function Home() {
     }
   });
 
+  const getCategories = () => {
+    return products.map((product) => product.category);
+  };
 
-  const [selectedCategory, setSelectedCategory] = useState('Menus');
-
+  const [selectedCategory, setSelectedCategory] = useState('food');
   const handleCategoryPress = (category) => {
+    console.log(category);
     setSelectedCategory(category);
   };
 
@@ -135,38 +138,19 @@ export default function Home() {
   return (
     <View style={{alignItems: 'center'}}>
       <View style= {styles.categoriesNavbar}>
-        {categories.map((category, index) => {
-          return <TouchableOpacity key={index} onPress={() => handleCategoryPress(category.name)}>
-            {/* <View> */}
-              <Text>{category.name}</Text>
-            {/* </View> */}
+        {getCategories().map((category, index) => {
+          return <TouchableOpacity key={index} onPress={() => handleCategoryPress(category)}>
+              <Text>{category}</Text>
           </TouchableOpacity>
-        })} */}
+        })}
       </View>
 
       <TouchableOpacity onPress={handlePress} style={{height: windowHeight*2/100, flexDirection: 'row', justifyContent: 'center', opacity: 0}}>
         <Text >Connection</Text>
       </TouchableOpacity>
       <View style={styles.productContainer}>
-        {/* <FlatList
-          style={styles.flatList}
-          data={selectedProducts(selectedCategory)}
-          numColumns={2}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-              <TouchableOpacity
-              onPress={()=>{addProductToProductList(item)}}>
-                <ProductCard
-                  key={item.id}
-                  image={item.image}
-                  name={item.name}
-                  price={item.price}
-                />
-              </TouchableOpacity>
-          )}
-        /> */}
-        {selectedProducts(selectedCategory).map((item) => (
-          <View>
+        {selectedProducts(selectedCategory).map((item,index) => (
+          <View key={index}>
             <TouchableOpacity
               key={item.id}
               onPress={() => {
@@ -174,7 +158,6 @@ export default function Home() {
               }}>
               <ProductCard
                 key={item.id}
-                image={item.image}
                 name={item.name}
                 price={item.price}
               />
@@ -199,7 +182,7 @@ export default function Home() {
 
         <TouchableOpacity
         style={styles.payButton}
-        onPress={()=>{navigation.navigate('BillInterface')}}>
+        onPress={()=>{navigation.navigate('BillInterface',{commande:productList})}}>
           <Text>Payer</Text>
         </TouchableOpacity>
       </View>
