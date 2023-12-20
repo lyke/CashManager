@@ -5,7 +5,7 @@ import mysql from 'mysql';
 import { AdminsRoute } from './src/routes/admins.route';
 
 const app = express();
-const PORT = 5000;
+const PORT = 5001;
 
 app.use(express.json());
 
@@ -29,6 +29,13 @@ const productsRoute = new ProductsRoute(db);
 const ordersRoute = new OrdersRoute(db);
 const adminsRoute = new AdminsRoute(db);
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 app.use('/api/products', productsRoute.getRouter());
 app.use('/api/orders', ordersRoute.getRouter());
 app.use('/api/admins', adminsRoute.getRouter());
@@ -36,7 +43,6 @@ app.use('/api/admins', adminsRoute.getRouter());
 app.get('/', (req, res) => {
   res.send('Welcome to the Cash Manager API!');
   console.log("req", req);
-
 });
 
 app.listen(PORT, () => {

@@ -29,7 +29,7 @@ export class AdminsDao {
         if (error) {
           reject(error);
         } else {
-          resolve(results[0]);
+          resolve(results);
         }
       });
     });

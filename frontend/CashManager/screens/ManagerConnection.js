@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function ManagerConnection() {
+  const route = useRoute();
+  const { products } = route.params;
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleConnection = () => {
-    navigation.navigate('ManagerInterface')
+    navigation.navigate('ManagerInterface', { produit: products })
   }
 
   return (

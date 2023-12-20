@@ -4,35 +4,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Camera } from 'expo-camera';
 import Style from '../styles/style';
 
 export default function PaimentInterface() {
+  const route = useRoute();
+  const { commande } = route.params;
 
   const styles = Style;
   const navigation = useNavigation();
-  const [bill, setBill] = React.useState([
-    {
-      name: 'Burger poulet',
-      price: 6,
-    },
-    {
-      name: 'Burger beef',
-      price: 6,
-    },
-    {
-      name: 'Frites small',
-      price: 6,
-    },
-    {
-      name: 'Coca small',
-      price: 6,
-    }
-  ]);
-
+  const [bill, setBill] = React.useState(commande);
 
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -92,13 +76,13 @@ export default function PaimentInterface() {
       }
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('BillInterface');
+                          navigation.navigate('BillInterface', { commande: bill });
                         }}>
         <Text>Payer en espèce</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('BillInterface');
+                          navigation.navigate('BillInterface',{commande:bill});
                         }}>
         <Text>Précédent</Text>
       </TouchableOpacity>
