@@ -26,7 +26,23 @@ create the database and run the insertion script.
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'BoisdeCen2&*';
 CREATE DATABASE cash_manager_db;
 ```
-- run `node db.ts` 
+- run `node db.ts`
+
+
+##### Docker
+
+# Start the project
+
+source ./start.sh
+
+# Stop the project
+
+source ./stop.sh
+
+# Clear the images
+
+source ./clear-all.sh
+
 
 ##### Eslint
 

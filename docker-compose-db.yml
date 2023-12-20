@@ -2,11 +2,12 @@ version: '3'
 
 services:
   database:
-    image: mysql:latest
+    image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: BoisdeCen2&*
-      MYSQL_DATABASE: cash_manager_db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: BoisdeCen2&*
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    env_file:
+      - .env
+    volumes:
+      - mysql_data:/var/lib/mysql/data
     ports:
       - "3306:3306"
