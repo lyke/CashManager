@@ -1,6 +1,6 @@
 import * as mysql from 'mysql';
-import { DatabaseError, DatabaseServiceInterface } from './mysql/databaseServiceInterface'
-import { MysqlService } from './mysql/mysqlService'
+import { DatabaseError, DatabaseServiceInterface } from './database/databaseServiceInterface'
+import { MysqlService } from './database/mysqlService'
 
 import { Admin, DeleteAdminResponse } from '../types/admin';
 

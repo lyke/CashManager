@@ -1,8 +1,8 @@
 import * as mysql from 'mysql';
 
 import { DeleteProductResponse, Product } from '../types/product';
-import { DatabaseError, DatabaseServiceInterface } from './mysql/databaseServiceInterface'
-import { MysqlService } from './mysql/mysqlService'
+import { DatabaseError, DatabaseServiceInterface } from './database/databaseServiceInterface'
+import { MysqlService } from './database/mysqlService'
 
 export class ProductsDao {
   private db: DatabaseServiceInterface
