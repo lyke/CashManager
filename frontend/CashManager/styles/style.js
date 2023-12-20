@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   endButton: {
     borderRadius: 20,
     width: '100%',
-    margin: 20,
     backgroundColor: '#729365',
     height: 50,
     justifyContent: 'center'
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   productContainer: {
-    height: windowHeight / 100 * 62,
+    height: windowHeight / 100 * 60,
     // flexGrow: 1,
   },
   // productContainer: {
@@ -100,11 +99,11 @@ const styles = StyleSheet.create({
   selectionList: {
     marginTop: 20,
     backgroundColor: '#E2EBCF',
-    width: '100%',
-    height: windowHeight * 15 / 100,
+    width: '90%',
+    display: 'flex',
+    height: windowHeight / 100 * 20,
     padding: '3%',
     borderRadius: 10,
-    zIndex: 100,
   },
   formContainer: {
     backgroundColor: '#E2EBCF',
@@ -112,29 +111,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '80%',
     borderRadius: 5,
-  },
-  totalContainer: {
-    // backgroundColor: '#C7DDC5',
-    // width: '90%',
-    height: windowHeight * 5 / 100,
-    // marginTop: windowHeight*1/100,
-    padding: '3%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    justifyItems: 'space-between',
-
-    // alignItems: 'center',
-    borderRadius: 10,
-    // borderBottomStartRadius: 10,
-    // borderBottomEndRadius: 10,
-    zIndex: 100
-  },
-  total: {
-    backgroundColor: '#C7DDC5',
-    width: '50%',
-    height: windowHeight * 5 / 100,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   modal: {
     flex: 1,

@@ -104,29 +104,23 @@ export default function Home() {
             </View>
           ))}
       </View>
-      <ScrollView style={styles.selectionList}>
-        <Text>Ma commande :</Text>
-        {productList.map((product, index) => {
-            return <Text key={index}>- {product.name}</Text>;
-          }
-        )}
-      </ScrollView>
-      <View style={styles.totalContainer}>
-        <View style={styles.total}>
-          <Text>Total</Text>
-          <Text>
-            {productList.reduce((total, product) => total + product.price, 0)} €
-          </Text>
-        </View>
+      <View style={styles.selectionList}>
+        <ScrollView>
+          <Text>Ma commande :</Text>
+          {productList.map((product, index) => {
+              return <Text key={index}>- {product.name}</Text>;
+            }
+          )}
+        </ScrollView>
+      </View>
 
         <TouchableOpacity
           style={styles.endButton}
           onPress={() => {
             navigation.navigate('BillInterface', { commande: productList });
           }}>
-          <Text>Payer</Text>
+          <Text style={styles.buttonText}>Payer {productList.reduce((total, product) => total + product.price, 0)} €</Text>
         </TouchableOpacity>
-      </View>
     </View>
   );
 }
