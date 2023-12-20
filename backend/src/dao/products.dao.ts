@@ -3,11 +3,12 @@ import * as mysql from 'mysql';
 import { DeleteProductResponse, Product } from '../types/product';
 import { DatabaseError, DatabaseServiceInterface } from './database/databaseServiceInterface'
 import { MysqlService } from './database/mysqlService'
+import { DatabaseServiceFactory } from './database/databaseServiceFactory'
 
 export class ProductsDao {
   private db: DatabaseServiceInterface
-  constructor(db: mysql.Connection) {
-    this.db = new MysqlService(db)
+  constructor() {
+    this.db = new DatabaseServiceFactory().getDatabaseService()
   }
 
   public async getAllProducts(): Promise<Product[]> {

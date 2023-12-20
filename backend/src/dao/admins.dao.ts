@@ -3,11 +3,12 @@ import { DatabaseError, DatabaseServiceInterface } from './database/databaseServ
 import { MysqlService } from './database/mysqlService'
 
 import { Admin, DeleteAdminResponse } from '../types/admin';
+import { DatabaseServiceFactory } from './database/databaseServiceFactory'
 
 export class AdminsDao {
   private db: DatabaseServiceInterface
-  constructor(db: mysql.Connection) {
-    this.db = new MysqlService(db)
+  constructor() {
+    this.db = new DatabaseServiceFactory().getDatabaseService()
   }
 
   public async getAllAdmins(): Promise<Admin[]> {

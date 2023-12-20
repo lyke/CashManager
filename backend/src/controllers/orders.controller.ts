@@ -6,8 +6,8 @@ import { OrdersService } from '../services/orders.service';
 export class OrdersController {
   private ordersService: OrdersService;
 
-  constructor(db: mysql.Connection) {
-    this.ordersService = new OrdersService(db);
+  constructor() {
+    this.ordersService = new OrdersService();
   }
 
   public async getAllOrders(req: Request, res: Response, next: NextFunction) {

@@ -6,8 +6,8 @@ import { ProductsService } from '../services/products.service';
 export class ProductsController {
   private productsService: ProductsService;
 
-  constructor(db: mysql.Connection) {
-    this.productsService = new ProductsService(db);
+  constructor() {
+    this.productsService = new ProductsService();
   }
 
   public async getAllProducts(req: Request, res: Response, next: NextFunction) {
