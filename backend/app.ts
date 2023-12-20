@@ -1,33 +1,16 @@
-import express from 'express';
-import { ProductsRoute } from './src/routes/products.route';
-import { OrdersRoute } from './src/routes/orders.route';
-import mysql from 'mysql';
-import { AdminsRoute } from './src/routes/admins.route';
+import express from 'express'
+import { ProductsRoute } from './src/routes/products.route'
+import { OrdersRoute } from './src/routes/orders.route'
+import { AdminsRoute } from './src/routes/admins.route'
 
 const app = express();
 const PORT = 5000;
 
 app.use(express.json());
 
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'BoisdeCen2&*',
-  database: 'cash_manager_db',
-});
-
-db.connect((err) => {
-  if (err) {
-    console.error('Erreur de connexion à la base de données : ', err);
-    process.exit(1);
-  } else {
-    console.log('Connecté à la base de données!');
-  }
-});
-
-const productsRoute = new ProductsRoute(db);
-const ordersRoute = new OrdersRoute(db);
-const adminsRoute = new AdminsRoute(db);
+const productsRoute = new ProductsRoute();
+const ordersRoute = new OrdersRoute();
+const adminsRoute = new AdminsRoute();
 
 app.use('/api/products', productsRoute.getRouter());
 app.use('/api/orders', ordersRoute.getRouter());
