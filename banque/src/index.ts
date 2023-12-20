@@ -1,5 +1,5 @@
 import express from 'express';
-import mysql from 'mysql';
+import mysql from 'database';
 import { TransactionRoute } from './routes/transaction.route';
 import { AccountsRoute } from './routes/accounts.route'
 

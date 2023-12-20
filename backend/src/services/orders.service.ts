@@ -6,8 +6,8 @@ import { Order } from '../types/order';
 export class OrdersService {
   private ordersDao: OrdersDao;
 
-  constructor(db: mysql.Connection) {
-    this.ordersDao = new OrdersDao(db);
+  constructor() {
+    this.ordersDao = new OrdersDao();
   }
 
   public async getAllOrders() {

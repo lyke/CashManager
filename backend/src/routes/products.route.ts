@@ -5,8 +5,8 @@ export class ProductsRoute {
   private api: Router = express.Router();
   private readonly productsController: ProductsController;
 
-  constructor(db: any) {
-    this.productsController = new ProductsController(db);
+  constructor() {
+    this.productsController = new ProductsController();
     this.routes();
   }
 
