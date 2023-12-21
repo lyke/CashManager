@@ -3,10 +3,10 @@ import { AccountController } from '../controllers/account.controller';
 
 export class AccountsRoute {
   private api: Router = express.Router();
-  private readonly adminsController: AccountController;
+  private readonly accountController: AccountController;
 
   constructor(db: any) {
-    this.adminsController = new AccountController(db);
+    this.accountController = new AccountController(db);
     this.routes();
   }
 
@@ -17,23 +17,23 @@ export class AccountsRoute {
   private routes(): void {
     this.api.get(
       '/',
-      this.adminsController.getAllAccounts.bind(this.adminsController)
+      this.accountController.getAllAccounts.bind(this.accountController)
     );
 
     this.api.get(
-      '/:id',
-      this.adminsController.getAccountById.bind(this.adminsController));
+      '/:mail',
+      this.accountController.getAccountById.bind(this.accountController));
 
     this.api.post(
       '/',
-      this.adminsController.createAccount.bind(this.adminsController));
+      this.accountController.createAccount.bind(this.accountController));
 
     this.api.put(
-      '/:id',
-      this.adminsController.updateAccount.bind(this.adminsController));
+      '/:mail',
+      this.accountController.updateAccount.bind(this.accountController));
 
     this.api.delete(
-      '/:id',
-      this.adminsController.deleteAccount.bind(this.adminsController));
+      '/:mail',
+      this.accountController.deleteAccount.bind(this.accountController));
   }
 }

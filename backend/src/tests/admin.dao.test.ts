@@ -1,15 +1,16 @@
 import { AdminsDao } from '../dao/admins.dao';
-import * as mysql from 'mysql';
+import { DatabaseServiceInterface } from '../dao/database/databaseServiceInterface';
 
 describe('AdminsDao', () => {
   let dao: AdminsDao;
-  let mockDb: Partial<mysql.Connection>;
+  let mockDb: Partial<DatabaseServiceInterface>;
 
   beforeEach(() => {
     mockDb = {
       query: jest.fn(),
     };
-    dao = new AdminsDao(mockDb as mysql.Connection);
+    dao = new AdminsDao();
+    (dao as any).db = mockDb as DatabaseServiceInterface;
   });
 
   it('should get all admins', async () => {

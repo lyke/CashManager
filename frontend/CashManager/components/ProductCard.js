@@ -17,34 +17,45 @@ export default function ProductCard({name, price, image}) {
       width: windowWidth / 2.5,
       padding: '2%',
       marginTop: '3%',
-      marginBottom: '10%'
+      marginBottom: '10%',
+      margin: 10,
     },
     productImageContainer: {
       width: windowWidth / 2.5,
       height: windowWidth / 2.5,
       alignItems: 'center',
       borderRadius: 10,
-
+      margin: 10,
     },
     productImage: {
       width: '100%',
       height: '100%',
       alignItems: 'center',
       borderRadius: 10,
-    }
+    },
+    productCard: {
+      // alignItems: 'space-between',
+      // justifyContent: 'center',
+      // backgroundColor: '#E2EBCF',
+      // padding: 20,
+      // borderRadius: 5,
+      // width: windowWidth / 2.5,
+      // height: windowWidth / 2.5,
+      // margin: '2%'
+    },
   });
 
   return (
     <View style={styles.productCard}>
-      <TouchableOpacity onPress={()=>{navigation.navigate('ManagerProductInterface')}}>
-        <View style={styles.productImageContainer}>
-          <Image source={{uri: image}} style={styles.productImage}/>
-        </View>
-        <View style={styles.productTitleContainer}>
-          <Text>{name}</Text>
-          <Text style={{fontWeight: '600'}}>{price}€</Text>
-        </View>
-      </TouchableOpacity>
+      {/* <TouchableOpacity onPress={()=>{navigation.navigate('ManagerProductInterface')}}> */}
+      <View style={styles.productImageContainer}>
+        <Image source={{uri: image}} style={styles.productImage}/>
+      </View>
+      <View style={styles.productTitleContainer}>
+        <Text>{name}</Text>
+        <Text style={{fontWeight: '600'}}>{price}€</Text>
+      </View>
+      {/* </TouchableOpacity> */}
     </View>
   );
 }

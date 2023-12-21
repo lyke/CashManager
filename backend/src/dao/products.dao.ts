@@ -1,15 +1,18 @@
-import * as mysql from 'mysql';
-
 import { DeleteProductResponse, Product } from '../types/product';
+import { DatabaseError, DatabaseServiceInterface } from './database/databaseServiceInterface'
+import { DatabaseServiceFactory } from './database/databaseServiceFactory'
 
 export class ProductsDao {
-  constructor(private db: mysql.Connection) {}
+  private db: DatabaseServiceInterface
+  constructor() {
+    this.db = new DatabaseServiceFactory().getDatabaseService()
+  }
 
   public async getAllProducts(): Promise<Product[]> {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM product';
 
-      this.db.query(query, (error: mysql.MysqlError | null, results: Product[]) => {
+      this.db.queryCallback(query, (error: DatabaseError | null, results: Product[]) => {
         if (error) {
           reject(error);
         } else {
@@ -23,11 +26,15 @@ export class ProductsDao {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM product WHERE id = ?';
 
-      this.db.query(query, [id], (error: mysql.MysqlError | null, results: Product) => {
+      this.db.queryCallbackValues(query, [id], (error: DatabaseError | null, results: Product) => {
         if (error) {
           reject(error);
         } else {
-          resolve(results[0]);
+          if (Array.isArray(results)) {
+            resolve(results[0]);
+          } else {
+            resolve(results);
+          }
         }
       });
     });
@@ -37,7 +44,7 @@ export class ProductsDao {
     return new Promise((resolve, reject) => {
       const query = 'INSERT INTO product SET ?';
 
-      this.db.query(query, [product], (error: mysql.MysqlError | null, results: Product) => {
+      this.db.queryCallbackValues(query, [product], (error: DatabaseError | null, results: Product) => {
         if (error) {
           reject(error);
         } else {
@@ -51,7 +58,7 @@ export class ProductsDao {
     return new Promise((resolve, reject) => {
       const query = 'UPDATE product SET ? WHERE id = ?';
 
-      this.db.query(query, [product, id], (error: mysql.MysqlError | null) => {
+      this.db.queryCallbackValues(query, [product, id], (error: DatabaseError | null) => {
         if (error) {
           reject(error);
         } else {
@@ -65,7 +72,7 @@ export class ProductsDao {
     return new Promise((resolve, reject) => {
       const query = 'DELETE FROM product WHERE id = ?';
 
-      this.db.query(query, [id], (error: mysql.MysqlError | null) => {
+      this.db.queryCallbackValues(query, [id], (error: DatabaseError | null) => {
         if (error) {
           reject(error);
         } else {

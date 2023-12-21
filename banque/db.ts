@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-const mysql = require('mysql')
+const mysql = require('database')
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -25,7 +25,7 @@ connection.connect((err) => {
 
         const createTableAccountQuery = `
           CREATE TABLE IF NOT EXISTS account (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            mail VARCHAR(255) PRIMARY KEY,
             name VARCHAR(255),
             money DECIMAL(10, 2)
           )        `
