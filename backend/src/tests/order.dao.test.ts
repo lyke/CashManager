@@ -1,15 +1,15 @@
 import { OrdersDao } from '../dao/orders.dao';
-import * as mysql from 'mysql';
-
+import { DatabaseServiceInterface } from '../dao/database/databaseServiceInterface';
 describe('OrdersDao', () => {
   let dao: OrdersDao;
-  let mockDb: Partial<mysql.Connection>;
+  let mockDb: Partial<DatabaseServiceInterface>;
 
   beforeEach(() => {
     mockDb = {
       query: jest.fn(),
     };
-    dao = new OrdersDao(mockDb as mysql.Connection);
+    dao = new OrdersDao();
+    (dao as any).db = mockDb as DatabaseServiceInterface;
   });
 
   it('should get all orders', async () => {

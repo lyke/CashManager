@@ -1,8 +1,5 @@
-import * as mysql from 'mysql';
-
 import { DeleteOrderResponse, Order } from '../types/order';
 import { DatabaseError, DatabaseServiceInterface } from './database/databaseServiceInterface'
-import { MysqlService } from './database/mysqlService'
 import { DatabaseServiceFactory } from './database/databaseServiceFactory'
 
 export class OrdersDao {
