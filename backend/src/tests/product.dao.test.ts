@@ -1,32 +1,102 @@
-// __tests__/product.dao.test.ts
-import * as mysql from 'mysql';
 import { ProductsDao } from '../dao/products.dao';
-
-// Mock MySQL connection
-const mockConnection = {} as mysql.Connection;
-
-// Mock data
-const mockProduct = { id: 1, name: 'Test Product' };
+import * as mysql from 'mysql';
 
 describe('ProductsDao', () => {
-  let productsDao: ProductsDao;
+  let dao: ProductsDao;
+  let mockDb: Partial<mysql.Connection>;
 
   beforeEach(() => {
-    // Create a new instance of ProductsDao before each test
-    productsDao = new ProductsDao(mockConnection);
+    mockDb = {
+      query: jest.fn(),
+    };
+    dao = new ProductsDao(mockDb as mysql.Connection);
   });
 
-  test('getAllProducts should return an array of products', async () => {
-    // Implement your test logic here
-    const products = await productsDao.getAllProducts();
-    expect(Array.isArray(products)).toBe(true);
+  it('should get all products', async () => {
+    const mockProducts = [{
+      id: 1,
+      name: 'Product 1',
+      price: 100,
+      category: 'Category 1',
+      image: 'Image URL',
+      description: 'Product Description'
+    }, {
+      id: 2,
+      name: 'Product 2',
+      price: 100,
+      category: 'Category 2',
+      image: 'Image URL',
+      description: 'Product Description'
+    }];
+
+    (mockDb.query as jest.Mock).mockImplementation((query, callback) => {
+      callback(null, mockProducts);
+    });
+
+    const products = await dao.getAllProducts();
+    expect(products).toEqual(mockProducts);
   });
 
-  test('getProductById should return a product with the given ID', async () => {
-    // Implement your test logic here
-    const product = await productsDao.getProductById(1);
+  it('should get product by id', async () => {
+    const mockProduct = {
+      id: 3,
+      name: 'Product 3',
+      price: 100,
+      category: 'Category 3',
+      image: 'Image URL',
+      description: 'Product Description'
+    };
+
+    (mockDb.query as jest.Mock).mockImplementation((query, params, callback) => {
+      callback(null, [mockProduct]);
+    });
+
+    const product = await dao.getProductById(1);
     expect(product).toEqual(mockProduct);
   });
 
-  // Implement tests for other functions (createProduct, updateProduct, deleteProduct) in a similar manner
+  it('should create a product', async () => {
+    const mockProduct = {
+      id: 4,
+      name: 'Product 4',
+      price: 100,
+      category: 'Category 4',
+      image: 'Image URL',
+      description: 'Product Description'
+    };
+    const mockResult = { insertId: 1 };
+    (mockDb.query as jest.Mock).mockImplementation((query, params, callback) => {
+      callback(null, mockResult);
+    });
+
+    const product = await dao.createProduct(mockProduct);
+    expect(product).toEqual(mockProduct);
+  });
+
+  it('should update a product', async () => {
+    const mockProduct = {
+      id: 5,
+      name: 'Updated Product',
+      price: 100,
+      category: 'Category 5',
+      image: 'Image URL',
+      description: 'Product Description'
+    };
+    (mockDb.query as jest.Mock).mockImplementation((query, params, callback) => {
+      callback(null, {});
+    });
+
+    const product = await dao.updateProduct(1, mockProduct);
+    expect(product).toEqual(mockProduct);
+  });
+
+  it('should delete a product', async () => {
+    (mockDb.query as jest.Mock).mockImplementation((query, params, callback) => {
+      callback(null, {});
+    });
+
+    const response = await dao.deleteProduct(1);
+    expect(response).toEqual({ id: 1 });
+  });
+
 });

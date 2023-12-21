@@ -1,7 +1,7 @@
 export interface Order {
   id?: number;
   insertId?: number;
-  desc: Text;
+  desc: string;
 }
 
 export interface DeleteOrderResponse {
