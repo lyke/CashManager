@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.use('/api/products', productsRoute.getRouter());
 app.use('/api/orders', ordersRoute.getRouter());
 app.use('/api/admins', adminsRoute.getRouter());
-app.use('api/auth',authRoute.getRouter())
+app.use('/api/auth',authRoute.getRouter())
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Cash Manager API!');

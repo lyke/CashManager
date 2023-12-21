@@ -16,18 +16,8 @@ export class AuthRoute {
 
     private routes(): void {
         this.api.post(
-            '/login',
+            '/',
             this.authController.login.bind(this.authController)
-        );
-
-        this.api.post(
-            '/register',
-            this.authController.register.bind(this.authController)
-        );
-
-        this.api.post(
-            '/logout',
-            this.authController.logout.bind(this.authController)
         );
     }
 }

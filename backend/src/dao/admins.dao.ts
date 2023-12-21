@@ -104,6 +104,8 @@ export class AdminsDao {
   public async auth(username: string, password: string): Promise<string> {
     return new Promise(async (resolve, reject) => {
       try {
+        console.log(username +" / " +password);
+        
         const query = 'SELECT * FROM admin WHERE username = ?';
 
         this.db.queryCallbackValues(query, [username], async (error: DatabaseError | null, results: Admin) => {
@@ -116,8 +118,11 @@ export class AdminsDao {
             reject('Nom d\'utilisateur invalide');
             return;
           }
+          
+          const jsondata = JSON.stringify(results)
+          const parsedData = JSON.parse(jsondata)
 
-          const hashedPassword = results.password;
+          const hashedPassword = parsedData[0].password
           const passwordMatch = await bcrypt.compare(password, hashedPassword);
 
           if (!passwordMatch) {
