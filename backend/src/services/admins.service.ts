@@ -6,8 +6,8 @@ import { Admin } from "../types/admin";
 export class AdminsService {
   private adminsDao: AdminsDao;
 
-  constructor(db: mysql.Connection) {
-    this.adminsDao = new AdminsDao(db);
+  constructor() {
+    this.adminsDao = new AdminsDao();
   }
 
   public async getAllAdmins() {

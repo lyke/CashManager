@@ -5,8 +5,8 @@ export class AdminsRoute {
   private api: Router = express.Router();
   private readonly adminsController: AdminsController;
 
-  constructor(db: any) {
-    this.adminsController = new AdminsController(db);
+  constructor() {
+    this.adminsController = new AdminsController();
     this.routes();
   }
 

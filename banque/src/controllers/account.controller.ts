@@ -14,21 +14,21 @@ export class AccountController {
 
       res.status(200).json(admins);
     } catch (error) {
-      console.error('Erreur lors de la récupération des ordres : ', error);
-      res.status(500).json({ error: 'Erreur lors de la récupération des ordres' });
+      console.error('Erreur lors de la récupération des comptes : ', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération des comptes' });
       next(error);
     }
   }
 
   public async getAccountById(req: Request, res: Response, next: NextFunction) {
     try {
-      const admin = await this.accountsService.getAccountById(Number(req.params.id));
+      const admin = await this.accountsService.getAccountById(req.params.mail);
 
       res.status(200).json(admin);
     }
     catch (error) {
-      console.error('Erreur lors de la récupération du produit : ', error);
-      res.status(500).json({ error: 'Erreur lors de la récupération du produit' });
+      console.error('Erreur lors de la récupération du compte : ', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération du compte' });
       next(error);
     }
   }
@@ -40,34 +40,34 @@ export class AccountController {
       res.status(200).json(admin);
     }
     catch (error) {
-      console.error('Erreur lors de la création du produit : ', error);
-      res.status(500).json({ error: 'Erreur lors de la création du produit' });
+      console.error('Erreur lors de la création du compte : ', error);
+      res.status(500).json({ error: 'Erreur lors de la création du compte' });
       next(error);
     }
   }
 
   public async updateAccount(req: Request, res: Response, next: NextFunction) {
     try {
-      const admin = await this.accountsService.updateAccount(Number(req.params.id), req.body);
+      const admin = await this.accountsService.updateAccount(req.params.mail, req.body);
 
       res.status(200).json(admin);
     }
     catch (error) {
-      console.error('Erreur lors de la mise à jour du produit : ', error);
-      res.status(500).json({ error: 'Erreur lors de la mise à jour du produit' });
+      console.error('Erreur lors de la mise à jour du compte : ', error);
+      res.status(500).json({ error: 'Erreur lors de la mise à jour du compte' });
       next(error);
     }
   }
 
   public async deleteAccount(req: Request, res: Response, next: NextFunction) {
     try {
-      const admin = await this.accountsService.deleteAccount(Number(req.params.id));
+      const admin = await this.accountsService.deleteAccount(req.params.mail);
 
       res.status(200).json(admin)
     }
     catch (error) {
-      console.error('Erreur lors de la suppression du produit : ', error);
-      res.status(500).json({ error: 'Erreur lors de la suppression du produit' });
+      console.error('Erreur lors de la suppression du compte : ', error);
+      res.status(500).json({ error: 'Erreur lors de la suppression du compte' });
       next(error);
     }
   }

@@ -6,8 +6,8 @@ import { AdminsService } from '../services/admins.service';
 export class AdminsController {
   private adminsService: AdminsService;
 
-  constructor(db: mysql.Connection) {
-    this.adminsService = new AdminsService(db);
+  constructor() {
+    this.adminsService = new AdminsService();
   }
 
   public async getAllAdmins(req: Request, res: Response, next: NextFunction) {

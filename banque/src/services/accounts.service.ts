@@ -6,36 +6,36 @@ export class AccountsService {
     this.accountDao = new AccountDao(db);
   }
 
-  async removeFromAccount(idToDebit: number, amount: number) {
-    let account = await this.accountDao.getAccountById(idToDebit)
+  async removeFromAccount(mailToDebit: string, amount: number) {
+    let account = await this.accountDao.getAccountById(mailToDebit)
 
     if ( !account.money || account.money < amount) { return  false }
 
     account.money -= amount
-    await this.accountDao.updateAccount(idToDebit, account)
+    await this.accountDao.updateAccount(mailToDebit, account)
     return true
   }
 
-  async addToAccount(idToCredit: number, amount: number) {
-    let account = await this.accountDao.getAccountById(idToCredit)
+  async addToAccount(mailToCredit: string, amount: number) {
+    let account = await this.accountDao.getAccountById(mailToCredit)
     account.money += amount
-    await this.accountDao.updateAccount(idToCredit, account)
+    await this.accountDao.updateAccount(mailToCredit, account)
   }
 
   async getAllAccounts() {
     return this.accountDao.getAllAccounts()
   }
 
-  async getAccountById(id: number) {
-    return this.accountDao.getAccountById(id)
+  async getAccountById(mail: string) {
+    return this.accountDao.getAccountById(mail)
   }
 
-  async updateAccount(id: number, account: any) {
-    return this.accountDao.updateAccount(id, account)
+  async updateAccount(mail: string, account: any) {
+    return this.accountDao.updateAccount(mail, account)
   }
 
-  async deleteAccount(id: number) {
-    return this.accountDao.deleteAccount(id)
+  async deleteAccount(mail: string) {
+    return this.accountDao.deleteAccount(mail)
   }
 
   async createAccount(account: any) {
