@@ -34,28 +34,19 @@ export default function ProductCard({name, price, image}) {
       borderRadius: 10,
     },
     productCard: {
-      // alignItems: 'space-between',
-      // justifyContent: 'center',
-      // backgroundColor: '#E2EBCF',
-      // padding: 20,
-      // borderRadius: 5,
-      // width: windowWidth / 2.5,
-      // height: windowWidth / 2.5,
-      // margin: '2%'
+      margin: '2%',
     },
   });
 
   return (
     <View style={styles.productCard}>
-      {/* <TouchableOpacity onPress={()=>{navigation.navigate('ManagerProductInterface')}}> */}
-      <View style={styles.productImageContainer}>
+      {/* <View style={styles.productImageContainer}>
         <Image source={{uri: image}} style={styles.productImage}/>
-      </View>
+      </View> */}
       <View style={styles.productTitleContainer}>
         <Text>{name}</Text>
         <Text style={{fontWeight: '600'}}>{price}€</Text>
       </View>
-      {/* </TouchableOpacity> */}
     </View>
   );
 }
