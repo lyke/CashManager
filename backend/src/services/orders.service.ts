@@ -1,7 +1,5 @@
-import * as mysql from 'mysql';
-
-import { OrdersDao } from '../dao/orders.dao';
-import { Order } from '../types/order';
+import { OrdersDao } from '../dao/orders.dao'
+import { Order } from '../types/order'
 
 export class OrdersService {
   private ordersDao: OrdersDao;

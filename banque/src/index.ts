@@ -1,12 +1,17 @@
 import express from 'express';
-import mysql from 'database';
+import mysql from 'mysql';
 import { TransactionRoute } from './routes/transaction.route';
 import { AccountsRoute } from './routes/accounts.route'
 
 const app = express();
-const PORT = 5001;
+const PORT = 5002;
 
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 const db = mysql.createConnection({
   host: 'localhost',

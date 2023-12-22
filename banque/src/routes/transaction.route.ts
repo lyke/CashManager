@@ -3,10 +3,10 @@ import { TransactionController } from '../controllers/transaction.controller';
 
 export class TransactionRoute {
   private api: Router = express.Router();
-  private readonly usersController: TransactionController;
+  private readonly transactionController: TransactionController;
 
   constructor(db: any) {
-    this.usersController = new TransactionController(db);
+    this.transactionController = new TransactionController(db);
     this.routes();
   }
 
@@ -16,8 +16,8 @@ export class TransactionRoute {
 
   private routes(): void {
     this.api.post(
-      '/:mailToDebit/:mailToCredit/:amount',
-      this.usersController.doTransaction.bind(this.usersController)
+      '/',
+      this.transactionController.doTransaction.bind(this.transactionController)
     );
   }
 }

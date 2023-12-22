@@ -1,7 +1,6 @@
-import * as mysql from 'mysql';
+import { ProductsDao } from '../dao/products.dao'
+import { Product } from '../types/product'
 
-import { ProductsDao } from '../dao/products.dao';
-import { Product } from '../types/product';
 export class ProductsService {
   private productsDao: ProductsDao;
 
