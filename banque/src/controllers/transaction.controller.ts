@@ -13,8 +13,6 @@ export class TransactionController {
     let mailToCredit = req.body.mailToCredit
     let amount = Number(req.body.amount)
 
-    console.log(amount+" "+mailToDebit+" "+mailToCredit)
-    console.log(req.body)
     try {
       if ( ! await this.usersService.getAccountById(mailToCredit) || ! await this.usersService.getAccountById(mailToDebit)){
         res.status(404).json({error: "unkown email"})
