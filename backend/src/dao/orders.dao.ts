@@ -1,4 +1,4 @@
-import { DeleteOrderResponse, Order } from '../types/order';
+import { DeleteOrderResponse, Order } from '../types/order'
 import { DatabaseError, DatabaseServiceInterface } from './database/databaseServiceInterface'
 import { DatabaseServiceFactory } from './database/databaseServiceFactory'
 

@@ -1,5 +1,5 @@
-import { AdminsDao } from '../dao/admins.dao';
-import { DatabaseServiceInterface } from '../dao/database/databaseServiceInterface';
+import { AdminsDao } from '../dao/admins.dao'
+import { DatabaseServiceInterface } from '../dao/database/databaseServiceInterface'
 
 describe('AdminsDao', () => {
   let dao: AdminsDao;

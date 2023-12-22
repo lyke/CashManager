@@ -1,7 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
-import * as mysql from 'mysql';
+import { NextFunction, Request, Response } from 'express'
 
-import { AdminsService } from '../services/admins.service';
+import { AdminsService } from '../services/admins.service'
 
 export class AdminsController {
   private adminsService: AdminsService;

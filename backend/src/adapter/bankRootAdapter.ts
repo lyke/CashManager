@@ -1,4 +1,3 @@
-import { promises } from 'node:dns'
 import { BankAdapterInterface } from './bankAdapterInterface'
 
 export class BankRootAdapter implements BankAdapterInterface{

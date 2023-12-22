@@ -1,5 +1,4 @@
-import express, { Router } from 'express';
-import { AdminsController } from '../controllers/admins.controller';
+import express, { Router } from 'express'
 import { BankController } from '../controllers/bank.controller'
 
 export class BankRoute {

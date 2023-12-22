@@ -1,5 +1,6 @@
-import { OrdersDao } from '../dao/orders.dao';
-import { DatabaseServiceInterface } from '../dao/database/databaseServiceInterface';
+import { OrdersDao } from '../dao/orders.dao'
+import { DatabaseServiceInterface } from '../dao/database/databaseServiceInterface'
+
 describe('OrdersDao', () => {
   let dao: OrdersDao;
   let mockDb: Partial<DatabaseServiceInterface>;

@@ -1,7 +1,5 @@
-import * as mysql from 'mysql';
-
-import { AdminsDao } from "../dao/admins.dao";
-import { Admin } from "../types/admin";
+import { AdminsDao } from '../dao/admins.dao'
+import { Admin } from '../types/admin'
 
 export class AdminsService {
   private adminsDao: AdminsDao;
