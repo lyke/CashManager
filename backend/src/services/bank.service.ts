@@ -1,15 +1,11 @@
-import * as mysql from 'mysql';
-
-import { AdminsDao } from "../dao/admins.dao";
-import { Admin } from "../types/admin";
-import { BankAdapter } from '../adapter/bankAdapter'
-import { BankController } from '../controllers/bank.controller'
+import { BankAdapterFactory } from '../adapter/bankAdapterFactory'
+import { BankAdapterInterface } from '../adapter/bankAdapterInterface'
 
 export class BankService {
-  private bankAdapter: BankAdapter;
+  private bankAdapter: BankAdapterInterface;
 
   constructor() {
-    this.bankAdapter = new BankAdapter();
+    this.bankAdapter = new BankAdapterFactory().getBankAdaptater();
   }
 
   public async createAdmin(clientEmail: string, amount: number) :Promise<number> {

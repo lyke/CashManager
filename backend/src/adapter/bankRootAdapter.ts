@@ -1,6 +1,7 @@
 import { promises } from 'node:dns'
+import { BankAdapterInterface } from './bankAdapterInterface'
 
-export class BankAdapter {
+export class BankRootAdapter implements BankAdapterInterface{
   private readonly url: string = 'http://localhost:5002/api/transactions/'
   private readonly mailOfTheCompany: string = 'mail_de_l_entreprise'
 
