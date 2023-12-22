@@ -9,10 +9,19 @@ export class TransactionController {
   }
 
   public async doTransaction(req: Request, res: Response, next: NextFunction) {
-    let mailToDebit = req.params.mailToDebit
-    let mailToCredit = req.params.mailToCredit
-    let amount = Number(req.params.amount)
+    let mailToDebit = req.body.mailToDebit
+    let mailToCredit = req.body.mailToCredit
+    let amount = Number(req.body.amount)
+
+    console.log(amount+" "+mailToDebit+" "+mailToCredit)
+    console.log(req.body)
     try {
+      if ( ! await this.usersService.getAccountById(mailToCredit) || ! await this.usersService.getAccountById(mailToDebit)){
+        res.status(404).json({error: "unkown email"})
+        next("this email does not correspond to an account")
+        return
+      }
+
       if (await this.usersService.removeFromAccount(mailToDebit, amount)){
         this.usersService.addToAccount(mailToCredit, amount)
         res.status(200).json({message: "transaction completed"})
