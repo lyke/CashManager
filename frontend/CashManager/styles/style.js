@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
 const { height: windowHeight } = Dimensions.get('window');
+const { width: windowWidth } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -142,6 +143,18 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
     width: '80%',
+  },
+  homeProductsContainer: {
+    // display: 'flex',
+    // flexDirection: 'row',
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
+    // marginBottom: 10,
+    // backgroundColor: '#eff5c6',
+    borderRadius: 10,
+    // width: windowWidth,
+    height: '5%'
   },
 });
 

@@ -25,10 +25,11 @@ export default function ManagerCategoryInterface() {
   const addProductPopUp = () => {
     setModalVisible(true);
   };
-  const goToProduct = (product) => {
 
+  const goToProduct = (product) => {
     navigation.navigate('ManagerProductInterface');
   };
+  
   const addProduct = () => {
     setProduct([...products, { name: newProduct }]);
     setNewProduct('');
