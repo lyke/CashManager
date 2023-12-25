@@ -44,80 +44,27 @@ export default function ManagerInterface() {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Espace manager</Text>
       </View>
+      <View style={{width:'80%', alignItems:'center'}}>
+        <TouchableOpacity style={styles.button}
+                          onPress={() => {
+                            navigation.navigate('ManagerAddProduct');
+                          }}>
+          <Text style={styles.buttonText}>Ajouter un produit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}
+                          onPress={() => {
+                            navigation.navigate('ManagerProductInterface');
+                          }}>
+          <Text style={styles.buttonText}>Modifier / Suprimer un produit</Text>
+        </TouchableOpacity>
 
-      {/* {!categories ? (
-        categories.map((category, index) => (
-          <View key={index} style={styles.categoryContainer}>
-            <TouchableOpacity onPress={() => goToCategory(category)}>
-              <Text style={styles.categoryText}>{category.name}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => deleteCategory(category)}>
-              <Icon name="times" size={30} color="black" />
-            </TouchableOpacity>
-          </View>
-        ))
-      ) : (
-        <Text>No categories available</Text>
-      )} */}
-
-      {/* {categories.map((category, index) => {
-        return (
-          <View key={index} style={styles.categoryContainer}>
-            <TouchableOpacity key={index} onPress={goToCategory}>
-              <Text style={styles.categoryText}>{category.name}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity key={category.name} onPress={() => deleteCategory(category)}>
-              <Icon name="times" size={30} color="black"/>
-            </TouchableOpacity>
-          </View>
-        );
-      })} */}
-{/*
-      <TouchableOpacity style={styles.button}
-                        onPress={addCategoryPopUp}>
-        <Text>Ajouter une catégorie</Text>
-      </TouchableOpacity> */}
-
-      {/* <Modal style={styles.modal}
-             animationType="slide"
-             transparent={true}
-             visible={modalVisible}
-             onRequestClose={() => {
-               setModalVisible(!modalVisible);
-             }}>
-        <SafeAreaView style={styles.modalContent}>
-          <TextInput style={styles.categoryContainer}
-                     onChangeText={(text) => setNewCategory(text)}
-                     value={newCategory}
-                     placeholder="Fruits"
-          />
-          <TouchableHighlight onPress={addCategory} style={styles.button}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableHighlight>
-
-        </SafeAreaView>
-
-      </Modal> */}
-
-      <TouchableOpacity style={styles.button}
-                        onPress={() => {
-                          navigation.navigate('ManagerAddProduct');
-                        }}>
-        <Text>Ajouter un produit</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}
-                        onPress={() => {
-                          navigation.navigate('ManagerProductInterface');
-                        }}>
-        <Text>Modifier / Suprimer un produit</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button}
-                        onPress={() => {
-                          navigation.navigate('Home');
-                        }}>
-        <Text>Déconnexion</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button}
+                          onPress={() => {
+                            navigation.navigate('Home');
+                          }}>
+          <Text style={styles.buttonText}>Déconnexion</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
