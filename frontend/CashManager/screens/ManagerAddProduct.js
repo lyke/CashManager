@@ -12,7 +12,7 @@ export default function ManagerAddProduct() {
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const [productDescription, setProductDescription] = useState('');
-  const [productCategory, setProductCategory] = useState('');
+  const [productCategory, setProductCategory] = useState(null);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -36,7 +36,16 @@ export default function ManagerAddProduct() {
 
   const categories = getCategories();
 
-  const createProduct = async (newProduct) => {
+  const handleCreateClick = async () => {
+    // Verification de remplissage des champs
+    if (!productName || !productPrice || !productDescription || !productCategory){
+      Alert.alert('Attention', 'Veuillez remplir tous les champs.');
+      return;
+    }
+    // Appel de la fonction crétion du produit
+    await createProduct(productName, productPrice, productDescription, productCategory);
+  };
+  const createProduct = async () => {
     try {
       const newProduct = {
         name: productName,
@@ -72,7 +81,9 @@ export default function ManagerAddProduct() {
 
   return (
     <View style={styles.container}>
+    <View style={styles.titleContainer}>
       <Text style={styles.title}>Ajouter un produit</Text>
+    </View>
       <TextInput
         style={styles.input}
         value={productName}
@@ -95,7 +106,8 @@ export default function ManagerAddProduct() {
         style={styles.input}
         selectedValue={productCategory}
         onValueChange={value => setProductCategory(value)}
-      >
+        >
+        <Picker.Item label="Catégorie" value={null} />
         {categories.map(category => (
           <Picker.Item key={category} label={category} value={category} />
         ))}
@@ -120,15 +132,17 @@ export default function ManagerAddProduct() {
           placeholder="Catégorie du produit"
         />
       )}
-      <TouchableOpacity style={styles.button} onPress={createProduct}>
-        <Text style={styles.buttonText}>Ajouter</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}
-                        onPress={() => {
-                          navigation.navigate('Home');
-                        }}>
-        <Text style={styles.buttonText}>Retour</Text>
-      </TouchableOpacity>
+      <View style={{width:'80%', alignItems:'center'}}>
+        <TouchableOpacity style={styles.button} onPress={handleCreateClick}>
+          <Text style={styles.buttonText}>Ajouter</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}
+                          onPress={() => {
+                            navigation.navigate('Home');
+                          }}>
+          <Text style={styles.buttonText}>Retour</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

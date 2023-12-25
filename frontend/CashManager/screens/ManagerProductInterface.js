@@ -106,13 +106,16 @@ export default function ManagerProductInterface() {
 
   return (
     <View style={styles.container}>
+    <View style={styles.titleContainer}>
       <Text style={styles.title}>Modifier un produit</Text>
+    </View>
 
       <Picker
         style={styles.input}
         selectedValue={productId}
         onValueChange={value => setProductId(value)}
       >
+      <Picker.Item label="Produit" value={null} />
         {products.map(product => (
           <Picker.Item key={product.id} label={product.name} value={product.id} />
         ))}
@@ -142,6 +145,7 @@ export default function ManagerProductInterface() {
         selectedValue={productCategory}
         onValueChange={value => setProductCategory(value)}
       >
+        <Picker.Item label="Catégorie du produit" value={null} />
         {categories.map((category, index) => (
           <Picker.Item key={index} label={category} value={category} />
         ))}
@@ -166,19 +170,20 @@ export default function ManagerProductInterface() {
           placeholder="Catégorie du produit"
         />
       )}
-
-      <TouchableOpacity style={styles.button} onPress={handleModifyClick}>
-        <Text style={styles.buttonText}>Modifier</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleDeleteClick}>
-        <Text style={styles.buttonText}>Supprimer</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}
-                        onPress={() => {
-                          navigation.navigate('Home');
-                        }}>
-        <Text style={styles.buttonText}>Retour</Text>
-      </TouchableOpacity>
+      <View style={{width:'80%', alignItems:'center'}}>
+        <TouchableOpacity style={styles.button} onPress={handleModifyClick}>
+          <Text style={styles.buttonText}>Modifier</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleDeleteClick}>
+          <Text style={styles.buttonText}>Supprimer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}
+                          onPress={() => {
+                            navigation.navigate('Home');
+                          }}>
+          <Text style={styles.buttonText}>Retour</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

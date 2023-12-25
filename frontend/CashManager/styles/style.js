@@ -49,7 +49,11 @@ const styles = StyleSheet.create({
   },
   productContainer: {
     height: windowHeight / 100 * 60,
-    // flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    // alignItems: 'center',
   },
   // productContainer: {
   //     flexDirection: 'row',
@@ -154,7 +158,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#eff5c6',
     borderRadius: 10,
     // width: windowWidth,
-    height: '5%'
+    // height: '5%'
   },
 });
 

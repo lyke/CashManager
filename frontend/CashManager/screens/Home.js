@@ -18,7 +18,7 @@ export default function Home() {
   const navigation = useNavigation();
   const [lastPressTime, setLastPressTime] = useState(0);
   const [pressCount, setPressCount] = useState(0);
-  const timeThreshold = 500; // 500 ms entre chaque pression
+  const timeThreshold = 500; // 500 ms entre chaque pression (5 taps pour accéder à l'interface manager)
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -28,11 +28,10 @@ export default function Home() {
     const unsubscribe = navigation.addListener('focus', () => {
       fetchProducts();
     });
-
     return unsubscribe;
   }, [navigation]);
 
-
+  // Récupère la liste des produits depuis l'API
   const fetchProducts = async () => {
     try {
       const response = await fetch('http://localhost:5001/api/products');
@@ -42,7 +41,7 @@ export default function Home() {
       console.error('Error fetching products', error);
     }
   };
-
+  // logique du bouton secret d'accès à l'interface manager
   const handlePress = () => {
     const currentTime = new Date().getTime();
     const elapsedTime = currentTime - lastPressTime;
@@ -65,13 +64,6 @@ export default function Home() {
   };
   const categories = getCategories();
 
-  // const [selectedCategory, setSelectedCategory] = useState(() => {
-  //   return categories.length >= 1 ? categories[0] : null}
-  // );
-
-  // const [selectedCategory, setSelectedCategory] = useState(categories.length >= 1 ? `${categories[0]}` : '');
-
-
   const handleCategoryPress = (category) => {
     setSelectedCategory(category);
   };
@@ -84,28 +76,17 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      {/* <TouchableOpacity onPress={handlePress} style={{
-        height: windowHeight * 2 / 100,
-        opacity: 0,
-        position: 'fixed',
-        right: 10,
-        zIndex: 1
-      }}>
-        <Text>Connection</Text>
-      </TouchableOpacity> */}
       <View style={{height: windowHeight * 2 / 100,}}>
       </View>
-
+      {/* parcours des produits pour afficher les catégories disponibles */}
       <View style={styles.titleContainer}>
-        {getCategories()
-          .map((category, index) => {
-            return <TouchableOpacity key={index} onPress={() => handleCategoryPress(category)}>
-              <Text style={styles.title}>{category}</Text>
-            </TouchableOpacity>;
-          })}
+        {categories.map((category, index) => {
+          return <TouchableOpacity key={index} onPress={() => handleCategoryPress(category)}>
+            <Text style={styles.title}>{category}</Text>
+          </TouchableOpacity>;
+        })}
       </View>
-
-
+      {/* affichage des produits appartenant à la catégorie sélectionnée */}
       <View style={styles.productContainer}>
         {selectedProducts(selectedCategory)
           .map((item, index) => (
@@ -124,6 +105,7 @@ export default function Home() {
             </View>
           ))}
       </View>
+      {/* fenêtre d'affichages des produits sélectionnés */}
       <View style={styles.selectionList}>
         <ScrollView>
           <TouchableOpacity onPress={handlePress}>
@@ -135,7 +117,7 @@ export default function Home() {
           )}
         </ScrollView>
       </View>
-
+      {/* bouton pour payer */}
         <TouchableOpacity
           style={styles.endButton}
           onPress={() => {

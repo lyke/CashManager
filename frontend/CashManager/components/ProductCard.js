@@ -16,9 +16,9 @@ export default function ProductCard({name, price, image}) {
       borderRadius: 10,
       width: windowWidth / 2.5,
       padding: '2%',
-      marginTop: '3%',
-      marginBottom: '10%',
-      margin: 10,
+      // marginTop: '3%',
+      // marginBottom: '10%',
+      // margin: 10,
     },
     productImageContainer: {
       width: windowWidth / 2.5,
