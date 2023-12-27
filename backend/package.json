@@ -9,6 +9,7 @@
     "prettier:check": "prettier --check \"src/**/*.ts\"",
     "prettier:run": "prettier --write ."
   },
+  "type": "module",
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node"
@@ -44,6 +45,6 @@
     "nodemon": "^3.0.1",
     "prettier": "^3.1.0",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   }
 }
