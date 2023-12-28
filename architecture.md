@@ -4,10 +4,12 @@
 
 ## Sommaire
 <!-- TOC -->
+* [to do -> un paragraphe sur l'utilisation du pattern adapter et de la factory pour une souplesse max sur la connexion à la banque. Mettre des liens vers refactoring guru pour les patterns !](#to-do---un-paragraphe-sur-lutilisation-du-pattern-adapter-et-de-la-factory-pour-une-souplesse-max-sur-la-connexion-à-la-banque-mettre-des-liens-vers-refactoring-guru-pour-les-patterns-)
 * [Architecture](#architecture)
   * [Sommaire](#sommaire)
   * [TypeScript](#typescript)
   * [Architecture en couche](#architecture-en-couche)
+  * [Un adaptateur pour la banque](#un-adaptateur-pour-la-banque)
   * [DAO Pattern](#dao-pattern)
     * [Les deux versions du DAO pattern appliqué au projet cash manager](#les-deux-versions-du-dao-pattern-appliqué-au-projet-cash-manager)
   * [databaseService](#databaseservice)
@@ -50,7 +52,13 @@ afin de centraliser toute la logique de connexion en une seule classe, interfac�
 Créer ainsi un adaptateur encapsulé par une interface permet de faire ce que [les principes GRASP](https://fr.wikipedia.org/wiki/GRASP_(programmation)#Indirection) appellent une indirection, très utile à la maintenabilité du code.
 
 Nous avons couplé le pattern adaptateur à une factory.
-Le but est de pouvoir modifier l'instance d'adaptateur crée, et donc la logique de connexion à la banque, en une seule ligne pour tout le programme.
+Le but est de pouvoir modifier l'instance de `BankAdapterInterface` crée, et donc la logique de connexion à la banque, en une seule ligne pour tout le programme.
+
+La factory permet également d'assurer qu'une seule instance de `BankAdapterInterface` existe en même temps, afin d'optimiser notre API et pour prévenir d'éventuels problème d'accès concurrents.
+
+Voilà un zoom plus détaillé sur notre architecture pour illustrer notre mannière de gérer la connexion à une banque externe :
+
+![bankAdapter.png](img/uml/bankAdapter.png)
 
 ## DAO Pattern
 
@@ -75,6 +83,6 @@ Bien qu'assez simple, le système est très efficace puisque dès lors, tout les
 En cas de changement de base de donnée, il suffit de créer une nouvelle implémentation de cette interface permettant de d'éxecuter une requête.
 En changeant simplement la manière dont notre factory instancie l'implémentation de l'interface `databaseServiceInterface`.
 
-Pour mieux comprendre un diagrame de classe simplifié qui se concentre sur l'implémentation du databaseService :
+Pour mieux comprendre, voici un diagrame de classe simplifié qui se concentre sur l'implémentation du databaseService :
 
 ![databaseService.png](img/uml/databaseService.png)
