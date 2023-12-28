@@ -11,6 +11,8 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     semi: ['error', 'never'], // Désactive la règle des points-virgules
+    'import/extensions': ['error', 'never'],
+    'import/prefer-default-export': false,
   },
   env: {
     browser: true,
