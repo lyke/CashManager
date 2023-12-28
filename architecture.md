@@ -36,7 +36,21 @@ Nous n'avons pas voulu suivre le modèle MVC, peu adapté à node JS et à la co
 Nous nous rapprochons plus de l'architecture du framework Java Spring, en particulier avec l'intégration des DAO (data access object).
 Nous n'avons pas besoins de DTO (data transfert object) puisque les objets JS sont déjà dans le format de données majoritairement utilisé dans le web (Json).
 
+Voilà un diagramme de classe (très simplifié) permettant de comprendre l'architecture que nous avons adopté : 
+
 ![classDiagram.png](img/uml/classDiagram.png)
+
+## Un adaptateur pour la banque
+
+La connexion à la banque est une fonctionnalité importante, avec un fort risque de modification à l'avenir.
+Il est donc important de s'assurer que cete fonctionnalité ait un coup de modification le moins élevé possible.
+
+Pour cela nous avons décider d'utiliser le pattern Adapter [(voir Refachttps://refactoring.guru/fr/design-patterns/adaptertoring Guru)](https://refactoring.guru/fr/design-patterns/adapter)
+afin de centraliser toute la logique de connexion en une seule classe, interfacé au préalable, qu'il sera ainsi facile de remplacer par une autre instance si besoins.
+Créer ainsi un adaptateur encapsulé par une interface permet de faire ce que [les principes GRASP](https://fr.wikipedia.org/wiki/GRASP_(programmation)#Indirection) appellent une indirection, très utile à la maintenabilité du code.
+
+Nous avons couplé le pattern adaptateur à une factory.
+Le but est de pouvoir modifier l'instance d'adaptateur crée, et donc la logique de connexion à la banque, en une seule ligne pour tout le programme.
 
 ## DAO Pattern
 
