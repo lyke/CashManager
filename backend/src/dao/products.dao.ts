@@ -1,4 +1,4 @@
-import { DeleteProductResponse, Product } from '../types/product';
+import { DeleteProductResponse, Product } from '../types/product'
 import { DatabaseError, DatabaseServiceInterface } from './database/databaseServiceInterface'
 import { DatabaseServiceFactory } from './database/databaseServiceFactory'
 

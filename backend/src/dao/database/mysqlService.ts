@@ -1,6 +1,6 @@
-import * as mysql from 'mysql';
-import { DatabaseError, DatabaseServiceInterface } from './databaseServiceInterface'
+import * as mysql from 'mysql'
 import { MysqlError } from 'mysql'
+import { DatabaseError, DatabaseServiceInterface } from './databaseServiceInterface'
 
 export class MysqlService implements DatabaseServiceInterface {
   private db: mysql.Connection

@@ -1,6 +1,6 @@
 import { DatabaseError, DatabaseServiceInterface } from './database/databaseServiceInterface'
 
-import { Admin, DeleteAdminResponse } from '../types/admin';
+import { Admin, DeleteAdminResponse } from '../types/admin'
 import { DatabaseServiceFactory } from './database/databaseServiceFactory'
 
 export class AdminsDao {
