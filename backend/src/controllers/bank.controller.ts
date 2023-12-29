@@ -16,7 +16,7 @@ export class BankController {
       const clientMail = req.body.client
       const amount = Number(req.body.bill)
       if (clientMail && amount) {
-        const codeFromBank = await this.bankService.createAdmin(clientMail, amount)
+        const codeFromBank = await this.bankService.doTransaction(clientMail, amount)
         codeResponse = codeFromBank
         if (codeFromBank === 200) {
           messageResponse = 'paiement validé par la banque'
