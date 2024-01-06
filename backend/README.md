@@ -26,7 +26,13 @@ create the database and run the insertion script.
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'BoisdeCen2&*';
 CREATE DATABASE cash_manager_db;
 ```
-- run `node src/dao/mysql/db.ts` 
+- run `node src/dao/mysql/db.ts`
+
+##### Unit tests
+
+To start tests run
+
+    $ npx jest
 
 ##### Eslint
 

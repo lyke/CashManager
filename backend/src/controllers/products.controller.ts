@@ -1,7 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
-import * as mysql from 'mysql';
+import { NextFunction, Request, Response } from 'express'
 
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from '../services/products.service'
 
 export class ProductsController {
   private productsService: ProductsService;

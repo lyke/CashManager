@@ -8,6 +8,7 @@ import ManagerProductInterface from './screens/ManagerProductInterface';
 import BillInterface from './screens/BillInterface';
 import PaimentInterface from './screens/PaimentInterface';
 import ManagerInterface from './screens/ManagerInterface';
+import ManagerAddProduct from './screens/ManagerAddProduct';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Screen name="ManagerInterface" component={ManagerInterface} options={{headerShown: false}} />
         <Stack.Screen name="ManagerCategoryInterface" component={ManagerCategoryInterface} options={{headerShown: false}} />
         <Stack.Screen name="ManagerProductInterface" component={ManagerProductInterface} options={{headerShown: false}} />
+        <Stack.Screen name="ManagerAddProduct" component={ManagerAddProduct} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

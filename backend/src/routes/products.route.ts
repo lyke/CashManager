@@ -1,5 +1,5 @@
-import express, { Router } from 'express';
-import { ProductsController } from '../controllers/products.controller';
+import express, { Router } from 'express'
+import { ProductsController } from '../controllers/products.controller'
 
 export class ProductsRoute {
   private api: Router = express.Router();

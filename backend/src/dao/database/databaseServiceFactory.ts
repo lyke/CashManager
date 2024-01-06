@@ -1,4 +1,4 @@
-import { DatabaseError, DatabaseServiceInterface } from './databaseServiceInterface'
+import { DatabaseServiceInterface } from './databaseServiceInterface'
 import * as mysql from 'mysql'
 import { MysqlService } from './mysqlService'
 

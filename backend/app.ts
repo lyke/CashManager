@@ -2,6 +2,7 @@ import express from 'express'
 import { ProductsRoute } from './src/routes/products.route'
 import { OrdersRoute } from './src/routes/orders.route'
 import { AdminsRoute } from './src/routes/admins.route'
+import { BankRoute } from './src/routes/bank.route'
 import { AuthRoute } from './src/routes/auth.route'
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 const productsRoute = new ProductsRoute();
 const ordersRoute = new OrdersRoute();
 const adminsRoute = new AdminsRoute();
+const bankRoute = new BankRoute();
 const authRoute = new AuthRoute()
 
 app.use((req, res, next) => {
@@ -24,6 +26,7 @@ app.use((req, res, next) => {
 app.use('/api/products', productsRoute.getRouter());
 app.use('/api/orders', ordersRoute.getRouter());
 app.use('/api/admins', adminsRoute.getRouter());
+app.use('/api/banque', bankRoute.getRouter());
 app.use('/api/auth',authRoute.getRouter())
 
 app.get('/', (req, res) => {

@@ -1,7 +1,5 @@
-import * as mysql from 'mysql';
 import * as bcrypt from 'bcrypt';
 import { DatabaseError, DatabaseServiceInterface } from './database/databaseServiceInterface'
-import { MysqlService } from './database/mysqlService'
 
 import { Admin, DeleteAdminResponse } from '../types/admin';
 import { DatabaseServiceFactory } from './database/databaseServiceFactory'
@@ -105,7 +103,7 @@ export class AdminsDao {
     return new Promise(async (resolve, reject) => {
       try {
         console.log(username +" / " +password);
-        
+
         const query = 'SELECT * FROM admin WHERE username = ?';
 
         this.db.queryCallbackValues(query, [username], async (error: DatabaseError | null, results: Admin) => {
@@ -118,7 +116,7 @@ export class AdminsDao {
             reject('Nom d\'utilisateur invalide');
             return;
           }
-          
+
           const jsondata = JSON.stringify(results)
           const parsedData = JSON.parse(jsondata)
 
@@ -141,5 +139,5 @@ export class AdminsDao {
     });
   }
 
-  
+
 }

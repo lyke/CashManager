@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  database:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    env_file:
+      - .env
+    volumes:
+      - mysql_data:/var/lib/mysql/data
+    networks:
+      - network1
+
+  backend:
+    build: backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - database
+    environment:
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - API_PORT=${API_PORT}
+    restart: always
+    container_name: "tdev-700-backend"
+    networks:
+      - network1
+
+  frontend:
+    build: frontend/CashManager
+    restart: always
+    container_name: "tdev-700-frontend"
+    volumes:
+      - "./frontend/CashManager:/app"
+      - "/app/node_modules"
+    depends_on:
+      - backend
+    ports:
+      - "19006:19006"
+    networks:
+      - network1
+
+networks:
+  network1:
+
+volumes:
+  mysql_data:

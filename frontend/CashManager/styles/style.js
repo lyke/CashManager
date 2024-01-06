@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
 const { height: windowHeight } = Dimensions.get('window');
+const { width: windowWidth } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -37,7 +38,6 @@ const styles = StyleSheet.create({
   endButton: {
     borderRadius: 20,
     width: '100%',
-    margin: 20,
     backgroundColor: '#729365',
     height: 50,
     justifyContent: 'center'
@@ -48,8 +48,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   productContainer: {
-    height: windowHeight / 100 * 62,
-    // flexGrow: 1,
+    height: windowHeight / 100 * 60,
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    // alignItems: 'center',
   },
   // productContainer: {
   //     flexDirection: 'row',
@@ -100,11 +104,11 @@ const styles = StyleSheet.create({
   selectionList: {
     marginTop: 20,
     backgroundColor: '#E2EBCF',
-    width: '100%',
-    height: windowHeight * 15 / 100,
+    width: '90%',
+    display: 'flex',
+    height: windowHeight / 100 * 20,
     padding: '3%',
     borderRadius: 10,
-    zIndex: 100,
   },
   formContainer: {
     backgroundColor: '#E2EBCF',
@@ -112,29 +116,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '80%',
     borderRadius: 5,
-  },
-  totalContainer: {
-    // backgroundColor: '#C7DDC5',
-    // width: '90%',
-    height: windowHeight * 5 / 100,
-    // marginTop: windowHeight*1/100,
-    padding: '3%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    justifyItems: 'space-between',
-
-    // alignItems: 'center',
-    borderRadius: 10,
-    // borderBottomStartRadius: 10,
-    // borderBottomEndRadius: 10,
-    zIndex: 100
-  },
-  total: {
-    backgroundColor: '#C7DDC5',
-    width: '50%',
-    height: windowHeight * 5 / 100,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   modal: {
     flex: 1,
@@ -166,6 +147,18 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
     width: '80%',
+  },
+  homeProductsContainer: {
+    // display: 'flex',
+    // flexDirection: 'row',
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
+    // marginBottom: 10,
+    // backgroundColor: '#eff5c6',
+    borderRadius: 10,
+    // width: windowWidth,
+    // height: '5%'
   },
 });
 
