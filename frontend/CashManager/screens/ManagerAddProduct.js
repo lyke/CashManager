@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, Switch, Picker } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Switch } from 'react-native';
+import { Picker } from '@react-native-picker/picker'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Style from '../styles/style';
 import axios from 'axios';
