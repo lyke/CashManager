@@ -24,7 +24,7 @@ export default function ManagerProductInterface() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/products');
+      const response = await fetch('https://cash-manager-back.vercel.app/api/products');
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -46,7 +46,7 @@ export default function ManagerProductInterface() {
         description: productDescription,
         category: productCategory,
       };
-      const response = await axios.put(`http://localhost:5001/api/products/${productId}`, updatedProduct);
+      const response = await axios.put(`https://cash-manager-back.vercel.app/api/products/${productId}`, updatedProduct);
       console.log('Product updated successfully', response.data);
       navigation.navigate('Home', { newProduct: response.data });
     } catch (error) {
@@ -56,7 +56,7 @@ export default function ManagerProductInterface() {
 
   const deleteProduct = async () => {
     try {
-      const response = await axios.delete(`http://localhost:5001/api/products/${productId}`);
+      const response = await axios.delete(`https://cash-manager-back.vercel.app/api/products/${productId}`);
       console.log('Product deleted successfully', response.data);
       navigation.navigate('Home');
     } catch (error) {

@@ -21,7 +21,7 @@ export default function ManagerAddProduct() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/products');
+      const response = await fetch('https://cash-manager-back.vercel.app/api/products');
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -53,7 +53,7 @@ export default function ManagerAddProduct() {
         description: productDescription,
         category: productCategory,
       };
-      const response = await axios.post('http://localhost:5001/api/products', newProduct);
+      const response = await axios.post('https://cash-manager-back.vercel.app/api/products', newProduct);
       console.log('Product created successfully', response.data);
       navigation.navigate('Home', { newProduct: response.data });
     } catch (error) {

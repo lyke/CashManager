@@ -34,7 +34,7 @@ export default function Home() {
   // Récupère la liste des produits depuis l'API
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/products');
+      const response = await fetch('https://cash-manager-back.vercel.app/api/products');
       const data = await response.json();
       setProducts(data);
     } catch (error) {
