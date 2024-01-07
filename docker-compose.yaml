@@ -11,17 +11,12 @@ services:
     networks:
       - network1
 
-  frontend:
-    build: frontend/CashManager
-    restart: always
-    container_name: "tdev-700-frontend"
-    volumes:
-      - "./frontend/CashManager:/app"
-      - "/app/node_modules"
-    depends_on:
-      - backend
+  banque:
+    build: banque
     ports:
-      - "19006:19006"
+      - "5002:5002"
+    restart: always
+    container_name: "tdev-700-banque"
     networks:
       - network1
 
@@ -42,5 +37,3 @@ services:
 networks:
   network1:
 
-volumes:
-  mysql_data:

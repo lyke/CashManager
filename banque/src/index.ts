@@ -14,10 +14,11 @@ app.use((req, res, next) => {
 });
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'BoisdeCen2&*',
-  database: 'cash_manager_db',
+  host: 'db4free.net',
+      port: 3306,
+      user: 'yvanyvan',
+      password: 'yvanyvan',
+      database: 'cash_manager',
 });
 
 db.connect((err) => {
