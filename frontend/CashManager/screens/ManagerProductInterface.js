@@ -48,7 +48,9 @@ export default function ManagerProductInterface() {
       };
       const response = await axios.put(`https://cash-manager-back.vercel.app/api/products/${productId}`, updatedProduct);
       console.log('Product updated successfully', response.data);
-      navigation.navigate('Home', { newProduct: response.data });
+      // navigation.navigate('Home', { newProduct: response.data });
+      navigation.navigate('ManagerInterface');
+
     } catch (error) {
       console.error('Error updating product', error);
     }
@@ -58,7 +60,10 @@ export default function ManagerProductInterface() {
     try {
       const response = await axios.delete(`https://cash-manager-back.vercel.app/api/products/${productId}`);
       console.log('Product deleted successfully', response.data);
-      navigation.navigate('Home');
+      // navigation.navigate('Home');
+      navigation.navigate('ManagerInterface');
+
+      
     } catch (error) {
       console.error('Error deleting product', error);
     }
@@ -179,7 +184,7 @@ export default function ManagerProductInterface() {
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}
                           onPress={() => {
-                            navigation.navigate('Home');
+                            navigation.navigate('MangerInterface');
                           }}>
           <Text style={styles.buttonText}>Retour</Text>
         </TouchableOpacity>
