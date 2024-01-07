@@ -14,30 +14,8 @@ import Style from '../styles/style';
 export default function ManagerInterface() {
 
   const styles = Style;
-  // const route = useRoute();
-  // const { produit } = route.params;
   const navigation = useNavigation();
-  // const [categories, setCategories] = React.useState(produit.map((product) => product.category));
 
-  // const [newCategory, setNewCategory] = React.useState('');
-  // const addCategoryPopUp = () => {
-  //   setModalVisible(true);
-  // };
-  // const goToCategory = (category) => {
-
-  //   navigation.navigate('ManagerCategoryInterface');
-  // };
-  // const addCategory = () => {
-  //   setCategories([...categories, { name: newCategory }]);
-  //   setNewCategory('');
-  // };
-
-  // const deleteCategory = (categoryToDelete) => {
-  //   const updatedCategories = categories.filter((category) => category.name != categoryToDelete.name);
-  //   setCategories(updatedCategories);
-  // };
-
-  // const [modalVisible, setModalVisible] = useState(false);
   return (
 
     <View style={styles.container}>

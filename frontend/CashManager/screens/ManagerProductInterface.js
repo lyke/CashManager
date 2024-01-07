@@ -64,7 +64,7 @@ export default function ManagerProductInterface() {
       // navigation.navigate('Home');
       navigation.navigate('ManagerInterface');
 
-      
+
     } catch (error) {
       console.error('Error deleting product', error);
     }
@@ -185,7 +185,7 @@ export default function ManagerProductInterface() {
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}
                           onPress={() => {
-                            navigation.navigate('MangerInterface');
+                            navigation.navigate('ManagerInterface');
                           }}>
           <Text style={styles.buttonText}>Retour</Text>
         </TouchableOpacity>

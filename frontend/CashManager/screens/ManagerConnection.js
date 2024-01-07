@@ -14,12 +14,7 @@ export default function ManagerConnection() {
   const [message, setMessage] = useState('');
 
   const handleConnection = async () => {
-    // try {
-    //   const response = await fetch('https://cash-manager-back.vercel.app/api/auth');
-    //   const data = await response.json();
-    // } catch (error) {
-      //   console.error('Error fetching products', error);
-      // }
+
       if (username == "yvanyvan" && password == "yvanyvan") {
         navigation.navigate('ManagerInterface', { produit: products });
       } else {
