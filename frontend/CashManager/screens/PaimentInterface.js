@@ -32,6 +32,7 @@ export default function PaimentInterface() {
     data
   }) => {
     try {
+      setScanned(true);
       const newTransaction = {
         mailToDebit: data,
         mailToCredit: "timothee.baudequin@epitech.eu",
@@ -42,14 +43,15 @@ export default function PaimentInterface() {
         'https://cash-manager-banque.vercel.app/api/transactions',
         newTransaction);
       console.log('Transaction successfull', response.data);
-      setScanned(true);
+
       window.alert(`Transaction successfull!`);
       navigation.navigate('Home');
     } catch (error) {
       let message = "";
-      if (error.contains("404")) {
+      if (error.message.includes("404")) {
         message = "Insufficient funds or unknown account"
       }
+      setScanned(false);
       console.error('Error during transaction', error);
       window.alert('Error during transaction: ' + message);
     }
