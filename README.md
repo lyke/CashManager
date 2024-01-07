@@ -3,6 +3,7 @@
 ## Lancer le projet
 
 run `docker compose up` pour lancer le serveur du back et celui de la banque.
+run `docker exec -it tdev-700-frontend npm start` pour lancer l'application mobile.
 
 ## La programmation du Cash_Manager
 
