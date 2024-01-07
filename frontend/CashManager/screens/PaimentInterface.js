@@ -7,6 +7,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import Style from '../styles/style';
+import axios from 'axios';
 
 export default function PaimentInterface() {
   const route = useRoute();
@@ -26,12 +27,32 @@ export default function PaimentInterface() {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({
+  const handleBarCodeScanned = async ({
     type,
     data
   }) => {
-    setScanned(true);
-    window.alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    try {
+      const newTransaction = {
+        mailToDebit: data,
+        mailToCredit: "timothee.baudequin@epitech.eu",
+        amount: bill.reduce((price, product) => price = price + product.price, 0)
+      };
+
+      const response = await axios.post(
+        'https://cash-manager-banque.vercel.app/api/transactions',
+        newTransaction);
+      console.log('Transaction successfull', response.data);
+      setScanned(true);
+      window.alert(`Transaction successfull!`);
+      navigation.navigate('Home');
+    } catch (error) {
+      let message = "";
+      if (error.contains("404")) {
+        message = "Insufficient funds or unknown account"
+      }
+      console.error('Error during transaction', error);
+      window.alert('Error during transaction: ' + message);
+    }
   };
 
   const renderCamera = () => {
