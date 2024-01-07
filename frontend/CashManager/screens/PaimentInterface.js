@@ -37,7 +37,7 @@ export default function PaimentInterface() {
         mailToCredit: "timothee.baudequin@epitech.eu",
         amount: bill.reduce((price, product) => price = price + product.price, 0)
       };
-      console.log(data);console.log(bill);
+
       const response = await axios.post(
         'https://cash-manager-banque.vercel.app/api/transactions',
         newTransaction);
