@@ -14,8 +14,14 @@ export default function BillInterface() {
   const [bill, setBill] = React.useState(commande);
 
   const deleteProduct = (productToDelete) => {
-    const updatedBill = bill.filter((product) => product.name !== productToDelete.name);
-    setBill(updatedBill);
+    const indexToRemove = bill.findIndex(product => product.name === productToDelete.name);
+
+    if (indexToRemove !== -1) {
+      const updatedBill = [...bill];
+      updatedBill.splice(indexToRemove, 1);
+      setBill(updatedBill);
+    }
+    console.log(bill);
   };
 
   return (
