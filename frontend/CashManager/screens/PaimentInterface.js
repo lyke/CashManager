@@ -46,8 +46,12 @@ export default function PaimentInterface() {
       window.alert(`Transaction successfull!`);
       navigation.navigate('Home');
     } catch (error) {
+      let message = "";
+      if (error.contains("404")) {
+        message = "Insufficient funds or unknown account"
+      }
       console.error('Error during transaction', error);
-      window.alert('Error during transaction: ' + error);
+      window.alert('Error during transaction: ' + message);
     }
   };
 
