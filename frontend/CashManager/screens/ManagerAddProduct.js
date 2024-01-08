@@ -140,7 +140,7 @@ export default function ManagerAddProduct() {
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}
                           onPress={() => {
-                            navigation.navigate('MangerInterface');
+                            navigation.navigate('ManagerInterface');
                           }}>
           <Text style={styles.buttonText}>Retour</Text>
         </TouchableOpacity>
