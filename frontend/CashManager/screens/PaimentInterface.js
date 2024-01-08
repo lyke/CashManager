@@ -104,7 +104,7 @@ export default function PaimentInterface() {
                         onPress={() => {
                           setSelectedProds([]);
                           navigation.navigate('Home');
-                          window.alert(`Oder sent successfully!`);
+                          window.alert(`Order sent successfully!`);
                         }}>
         <Text style={styles.buttonText}>Payer en espèce</Text>
       </TouchableOpacity>
