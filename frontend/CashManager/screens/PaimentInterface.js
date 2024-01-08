@@ -12,12 +12,8 @@ import { useConstants } from './Constants';
 
 export default function PaimentInterface() {
   const route = useRoute();
-  // const { commande } = route.params;
-
   const styles = Style;
   const navigation = useNavigation();
-  // const [bill] = React.useState(commande);
-
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const { selectedProds, setSelectedProds } = useConstants();

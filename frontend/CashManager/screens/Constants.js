@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react';
-// export const [selectedProds, setSelectedProds] = useState([]);
 
 const ConstantsContext = createContext();
 

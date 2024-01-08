@@ -9,15 +9,9 @@ export default function BillInterface() {
 
   const styles = Style;
   const route = useRoute();
-  // const { commande } = route.params;
-  // console.log(commande);
   const navigation = useNavigation();
-  // const { bill, setBill } = useConstants();
   const { selectedProds, setSelectedProds } = useConstants();
-  // const [bill, setBill] = React.useState(commande);
-
   const deleteProduct = (productToDelete) => {
-    // const indexToRemove = bill.findIndex(product => product.name === productToDelete.name);
     const indexToRemove = selectedProds.findIndex(product => product.name === productToDelete.name);
 
     if (indexToRemove !== -1) {
@@ -35,10 +29,10 @@ export default function BillInterface() {
       </View>
       {console.log(selectedProds)}
       {selectedProds && selectedProds.length > 0 ? (
-        selectedProds.map((product) => (
-          <View style={styles.categoryContainer}>
-            <Text key={product.name} style={styles.categoryText}>{product.name}</Text>
-            <Text key={product.price} style={styles.categoryText}>{product.price} €</Text>
+        selectedProds.map((product, index) => (
+          <View style={styles.categoryContainer} key={index}>
+            <Text style={styles.categoryText}>{product.name}</Text>
+            <Text style={styles.categoryText}>{product.price} €</Text>
             <TouchableOpacity key={product.index} onPress={() => deleteProduct(product)}>
               <Icon name="times" size={30} color="black"/>
             </TouchableOpacity>
@@ -50,7 +44,6 @@ export default function BillInterface() {
       {selectedProds && selectedProds.length > 0 && (
         <TouchableOpacity style={styles.button}
                           onPress={() => {
-                            // navigation.navigate('PaimentInterface', { commande: bill });
                             navigation.navigate('PaimentInterface');
                           }}>
           <Text style={styles.buttonText}>Procéder au paiement</Text>

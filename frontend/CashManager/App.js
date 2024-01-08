@@ -10,7 +10,6 @@ import PaimentInterface from './screens/PaimentInterface';
 import ManagerInterface from './screens/ManagerInterface';
 import ManagerAddProduct from './screens/ManagerAddProduct';
 import { ConstantsProvider } from './screens/Constants';
-// import MainNavigator from './MainNavigator';
 
 const Stack = createNativeStackNavigator();
 

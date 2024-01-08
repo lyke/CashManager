@@ -57,7 +57,6 @@ export default function ManagerAddProduct() {
       const response = await axios.post('https://cash-manager-back.vercel.app/api/products', newProduct);
       console.log('Product created successfully', response.data);
       navigation.navigate('ManagerInterface');
-      // navigation.navigate('Home', { newProduct: response.data });
     } catch (error) {
       console.error('Error creating product', error);
     }
