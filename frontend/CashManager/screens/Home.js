@@ -131,7 +131,7 @@ export default function Home() {
             navigation.navigate('BillInterface');
             // navigation.navigate('BillInterface', { commande: productList });
           }}>
-          <Text style={styles.buttonText}>Payer {selectedProds.reduce((total, product) => total + product.price, 0)} €</Text>
+          <Text style={styles.buttonText}>Payer {selectedProds.reduce((total, product) => total + product.price, 0).toFixed(2)} €</Text>
           {/* <Text style={styles.buttonText}>Payer {productList.reduce((total, product) => total + product.price, 0)} €</Text> */}
         </TouchableOpacity>
     </View>

@@ -55,7 +55,7 @@ export default function BillInterface() {
                           }}>
           <Text style={styles.buttonText}>Procéder au paiement</Text>
           <Text
-            style={styles.buttonText}>{selectedProds.reduce((price, product) => price = price + product.price, 0)} €</Text>
+            style={styles.buttonText}>{selectedProds.reduce((price, product) => price = price + product.price, 0).toFixed(2)} €</Text>
         </TouchableOpacity>
         )}
       <TouchableOpacity style={styles.button}

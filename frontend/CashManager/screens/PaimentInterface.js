@@ -31,12 +31,15 @@ export default function PaimentInterface() {
   }, []);
 
   const handleBarCodeScanned = async ({
+    type,
+      data
+    }) => {
     try {
       setScanned(true);
       const newTransaction = {
         mailToDebit: data,
         mailToCredit: "timothee.baudequin@epitech.eu",
-        amount: bill.reduce((price, product) => price = price + product.price, 0)
+        amount: selectedProds.reduce((price, product) => price = price + product.price, 0)
       };
 
       const response = await axios.post(
@@ -45,6 +48,7 @@ export default function PaimentInterface() {
       console.log('Transaction successfull', response.data);
 
       window.alert(`Transaction successfull!`);
+      setSelectedProds([]);
       navigation.navigate('Home');
     } catch (error) {
       let message = "";
@@ -75,7 +79,7 @@ export default function PaimentInterface() {
         <Text style={styles.title}>Paiment</Text>
       </View><View style={styles.categoryContainer}>
       <Text style={styles.categoryText}>
-        {selectedProds.reduce((price, product) => price = price + product.price, 0)} €
+        {selectedProds.reduce((price, product) => price = price + product.price, 0).toFixed(2)} €
       </Text>
     </View>
       {hasPermission === null ?
@@ -98,7 +102,9 @@ export default function PaimentInterface() {
       }
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('BillInterface');
+                          setSelectedProds([]);
+                          navigation.navigate('Home');
+                          window.alert(`Oder sent successfully!`);
                         }}>
         <Text style={styles.buttonText}>Payer en espèce</Text>
       </TouchableOpacity>
