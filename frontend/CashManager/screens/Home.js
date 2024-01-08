@@ -70,10 +70,6 @@ export default function Home() {
   };
 
   const selectedProducts = (category) => products.filter(product => product.category === category);
-  // const [productList, setProductList] = useState([]);
-  // const addProductToProductList = (product) => {
-  //   setProductList(prevList => [...prevList, product]);
-  // };
   const { selectedProds, setSelectedProds } = useConstants();
   const addProductToProductList = (product) => {
     setSelectedProds(prevList => [...prevList, product]);
@@ -127,12 +123,9 @@ export default function Home() {
         <TouchableOpacity
           style={styles.endButton}
           onPress={() => {
-            // navigation.navigate('BillInterface', { commande: selectedProds });
             navigation.navigate('BillInterface');
-            // navigation.navigate('BillInterface', { commande: productList });
           }}>
           <Text style={styles.buttonText}>Payer {selectedProds.reduce((total, product) => total + product.price, 0).toFixed(2)} €</Text>
-          {/* <Text style={styles.buttonText}>Payer {productList.reduce((total, product) => total + product.price, 0)} €</Text> */}
         </TouchableOpacity>
     </View>
   );
