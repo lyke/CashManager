@@ -7,18 +7,20 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import Style from '../styles/style';
-import axios from 'axios';
+import { useConstants } from './Constants';
 
 export default function PaimentInterface() {
   const route = useRoute();
-  const { commande } = route.params;
+  // const { commande } = route.params;
 
   const styles = Style;
   const navigation = useNavigation();
-  const [bill] = React.useState(commande);
+  // const [bill] = React.useState(commande);
 
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const { selectedProds, setSelectedProds } = useConstants();
+
 
   useEffect(() => {
     (async () => {
@@ -27,34 +29,12 @@ export default function PaimentInterface() {
     })();
   }, []);
 
-  const handleBarCodeScanned = async ({
+  const handleBarCodeScanned = ({
     type,
     data
   }) => {
-    try {
-      setScanned(true);
-      const newTransaction = {
-        mailToDebit: data,
-        mailToCredit: "timothee.baudequin@epitech.eu",
-        amount: bill.reduce((price, product) => price = price + product.price, 0)
-      };
-
-      const response = await axios.post(
-        'https://cash-manager-banque.vercel.app/api/transactions',
-        newTransaction);
-      console.log('Transaction successfull', response.data);
-
-      window.alert(`Transaction successfull!`);
-      navigation.navigate('Home');
-    } catch (error) {
-      let message = "";
-      if (error.message.includes("404")) {
-        message = "Insufficient funds or unknown account"
-      }
-      setScanned(false);
-      console.error('Error during transaction', error);
-      window.alert('Error during transaction: ' + message);
-    }
+    setScanned(true);
+    window.alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   const renderCamera = () => {
@@ -75,7 +55,7 @@ export default function PaimentInterface() {
         <Text style={styles.title}>Paiment</Text>
       </View><View style={styles.categoryContainer}>
       <Text style={styles.categoryText}>
-        {bill.reduce((price, product) => price = price + product.price, 0)} €
+        {selectedProds.reduce((price, product) => price = price + product.price, 0)} €
       </Text>
     </View>
       {hasPermission === null ?
@@ -98,13 +78,13 @@ export default function PaimentInterface() {
       }
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('BillInterface', { commande: bill });
+                          navigation.navigate('BillInterface');
                         }}>
         <Text style={styles.buttonText}>Payer en espèce</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}
                         onPress={() => {
-                          navigation.navigate('BillInterface', { commande: bill });
+                          navigation.navigate('BillInterface');
                         }}>
         <Text style={styles.buttonText}>Précédent</Text>
       </TouchableOpacity>

@@ -9,6 +9,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import ProductCard from '../components/ProductCard';
 import Style from '../styles/style';
+import { useConstants } from './Constants';
 
 const { height: windowHeight } = Dimensions.get('window');
 
@@ -69,9 +70,13 @@ export default function Home() {
   };
 
   const selectedProducts = (category) => products.filter(product => product.category === category);
-  const [productList, setProductList] = useState([]);
+  // const [productList, setProductList] = useState([]);
+  // const addProductToProductList = (product) => {
+  //   setProductList(prevList => [...prevList, product]);
+  // };
+  const { selectedProds, setSelectedProds } = useConstants();
   const addProductToProductList = (product) => {
-    setProductList(prevList => [...prevList, product]);
+    setSelectedProds(prevList => [...prevList, product]);
   };
 
   return (
@@ -111,7 +116,8 @@ export default function Home() {
           <TouchableOpacity onPress={handlePress}>
             <Text>Ma commande :</Text>
           </TouchableOpacity>
-          {productList.map((product, index) => {
+          {/* {productList.map((product, index) => { */}
+          {selectedProds.map((product, index) => {
               return <Text key={index}>- {product.name}</Text>;
             }
           )}
@@ -121,9 +127,12 @@ export default function Home() {
         <TouchableOpacity
           style={styles.endButton}
           onPress={() => {
-            navigation.navigate('BillInterface', { commande: productList });
+            // navigation.navigate('BillInterface', { commande: selectedProds });
+            navigation.navigate('BillInterface');
+            // navigation.navigate('BillInterface', { commande: productList });
           }}>
-          <Text style={styles.buttonText}>Payer {productList.reduce((total, product) => total + product.price, 0)} €</Text>
+          <Text style={styles.buttonText}>Payer {selectedProds.reduce((total, product) => total + product.price, 0)} €</Text>
+          {/* <Text style={styles.buttonText}>Payer {productList.reduce((total, product) => total + product.price, 0)} €</Text> */}
         </TouchableOpacity>
     </View>
   );
