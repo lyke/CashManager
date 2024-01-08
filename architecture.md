@@ -1,10 +1,7 @@
-# to do -> un paragraphe sur l'utilisation du pattern adapter et de la factory pour une souplesse max sur la connexion à la banque. Mettre des liens vers refactoring guru pour les patterns !
-
 # Architecture
 
 ## Sommaire
 <!-- TOC -->
-* [to do -> un paragraphe sur l'utilisation du pattern adapter et de la factory pour une souplesse max sur la connexion à la banque. Mettre des liens vers refactoring guru pour les patterns !](#to-do---un-paragraphe-sur-lutilisation-du-pattern-adapter-et-de-la-factory-pour-une-souplesse-max-sur-la-connexion-à-la-banque-mettre-des-liens-vers-refactoring-guru-pour-les-patterns-)
 * [Architecture](#architecture)
   * [Sommaire](#sommaire)
   * [TypeScript](#typescript)
