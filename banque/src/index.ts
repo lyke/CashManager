@@ -20,7 +20,7 @@ const db = mysql.createConnection({
   database: 'cash_manager_db',
 });
 
-db.connect((err) => {
+db.connect((err: any) => {
   if (err) {
     console.error('Erreur de connexion à la base de données : ', err);
     process.exit(1);
@@ -36,7 +36,7 @@ const accountRoute = new AccountsRoute(db)
 app.use('/api/transactions', transactionRoute.getRouter());
 app.use('/api/accounts', accountRoute.getRouter());
 
-app.get('/', (req, res) => {
+app.get('/', (req: string, res) => {
   res.send('Welcome to the Bank-route API!');
   console.log("req", req);
 
