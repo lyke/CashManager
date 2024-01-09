@@ -49,7 +49,10 @@ export default function PaimentInterface() {
     } catch (error) {
       let message = "";
       if (error.message.includes("404")) {
-        message = "Insufficient funds or unknown account"
+        message = "Unknown account"
+      }
+      if (error.message.includes("409")) {
+        message = "Insufficient funds"
       }
       setScanned(false);
       console.error('Error during transaction', error);
