@@ -7,7 +7,8 @@
     "start": "nodemon --exec ts-node app.ts",
     "lint": "eslint . --ext .ts --config tsconfig.eslint.json",
     "prettier:check": "prettier --check \"src/**/*.ts\"",
-    "prettier:run": "prettier --write ."
+    "prettier:run": "prettier --write .",
+    "test": "jest --verbose"
   },
   "jest": {
     "preset": "ts-jest",
