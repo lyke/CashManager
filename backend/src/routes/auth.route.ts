@@ -15,9 +15,40 @@ export class AuthRoute {
     }
 
     private routes(): void {
-        this.api.post(
-            '/',
-            this.authController.login.bind(this.authController)
-        );
+    /**
+     * @swagger
+     * /auth/:
+     *   post:
+     *     tags: ["Authentication"]
+     *     summary: User login
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - in: body
+     *         name: credentials
+     *         description: The user credentials
+     *         schema:
+     *           type: object
+     *           properties:
+     *             username:
+     *               type: string
+     *               example: john_doe
+     *             password:
+     *               type: string
+     *               example: secret_password
+     *     responses:
+     *       200:
+     *         description: Success - user logged in
+     *       400:
+     *         description: Malformed request syntax
+     *       401:
+     *         description: Unauthorized
+     *       500:
+     *         description: Error during authentication
+     */
+    this.api.post(
+        '/',
+        this.authController.login.bind(this.authController)
+    );
     }
 }

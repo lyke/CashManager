@@ -1,4 +1,7 @@
 import express from 'express'
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+
 import { ProductsRoute } from './src/routes/products.route'
 import { OrdersRoute } from './src/routes/orders.route'
 import { AdminsRoute } from './src/routes/admins.route'
@@ -22,6 +25,28 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Votre API',
+      version: '1.0.0',
+    },
+    servers: [
+      {
+        url: `http://localhost:5001`,
+        description: 'Serveur local',
+      },
+    ],
+  },
+  apis: ['src/routes/admins.route.ts', 'src/routes/orders.route.ts', 'src/routes/products.route.ts', 'src/routes/bank.route.ts', 'src/routes/auth.route.ts'],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+
+// Middleware pour afficher la documentation Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/products', productsRoute.getRouter());
 app.use('/api/orders', ordersRoute.getRouter());
