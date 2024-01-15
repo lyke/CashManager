@@ -9,6 +9,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import ProductCard from '../components/ProductCard';
 import Style from '../styles/style';
+import { useConstants } from './Constants';
 
 const { height: windowHeight } = Dimensions.get('window');
 
@@ -34,7 +35,7 @@ export default function Home() {
   // Récupère la liste des produits depuis l'API
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/products');
+      const response = await fetch('https://cash-manager-back.vercel.app/api/products');
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -69,9 +70,9 @@ export default function Home() {
   };
 
   const selectedProducts = (category) => products.filter(product => product.category === category);
-  const [productList, setProductList] = useState([]);
+  const { selectedProds, setSelectedProds } = useConstants();
   const addProductToProductList = (product) => {
-    setProductList(prevList => [...prevList, product]);
+    setSelectedProds(prevList => [...prevList, product]);
   };
 
   return (
@@ -111,7 +112,8 @@ export default function Home() {
           <TouchableOpacity onPress={handlePress}>
             <Text>Ma commande :</Text>
           </TouchableOpacity>
-          {productList.map((product, index) => {
+          {/* {productList.map((product, index) => { */}
+          {selectedProds.map((product, index) => {
               return <Text key={index}>- {product.name}</Text>;
             }
           )}
@@ -121,9 +123,9 @@ export default function Home() {
         <TouchableOpacity
           style={styles.endButton}
           onPress={() => {
-            navigation.navigate('BillInterface', { commande: productList });
+            navigation.navigate('BillInterface');
           }}>
-          <Text style={styles.buttonText}>Payer {productList.reduce((total, product) => total + product.price, 0)} €</Text>
+          <Text style={styles.buttonText}>Payer {selectedProds.reduce((total, product) => total + product.price, 0).toFixed(2)} €</Text>
         </TouchableOpacity>
     </View>
   );

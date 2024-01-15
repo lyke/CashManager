@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, Switch, Picker } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Switch } from 'react-native';
+import { Picker } from '@react-native-picker/picker'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Style from '../styles/style';
 import axios from 'axios';
@@ -21,7 +22,7 @@ export default function ManagerAddProduct() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/products');
+      const response = await fetch('https://cash-manager-back.vercel.app/api/products');
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -53,9 +54,9 @@ export default function ManagerAddProduct() {
         description: productDescription,
         category: productCategory,
       };
-      const response = await axios.post('http://localhost:5001/api/products', newProduct);
+      const response = await axios.post('https://cash-manager-back.vercel.app/api/products', newProduct);
       console.log('Product created successfully', response.data);
-      navigation.navigate('Home', { newProduct: response.data });
+      navigation.navigate('ManagerInterface');
     } catch (error) {
       console.error('Error creating product', error);
     }
@@ -138,7 +139,7 @@ export default function ManagerAddProduct() {
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}
                           onPress={() => {
-                            navigation.navigate('Home');
+                            navigation.navigate('ManagerInterface');
                           }}>
           <Text style={styles.buttonText}>Retour</Text>
         </TouchableOpacity>

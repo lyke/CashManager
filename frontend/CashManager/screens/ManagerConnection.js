@@ -11,9 +11,15 @@ export default function ManagerConnection() {
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleConnection = () => {
-    navigation.navigate('ManagerInterface', { produit: products });
+  const handleConnection = async () => {
+
+      if (username == "yvanyvan" && password == "yvanyvan") {
+        navigation.navigate('ManagerInterface', { produit: products });
+      } else {
+        setMessage("The Username or the password is wrong !")
+      }
   };
 
   return (
@@ -41,6 +47,7 @@ export default function ManagerConnection() {
             value={password}
           />
         </View>
+        <Text style={{color:'red'}}>{message}</Text>
         <TouchableOpacity onPress={handleConnection} style={styles.button}>
           <Text style={styles.buttonText}>Se connecter</Text>
         </TouchableOpacity>
