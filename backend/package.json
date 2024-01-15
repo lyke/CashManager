@@ -9,7 +9,6 @@
     "prettier:check": "prettier --check \"src/**/*.ts\"",
     "prettier:run": "prettier --write ."
   },
-  "type": "module",
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node"
